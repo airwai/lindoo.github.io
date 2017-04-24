@@ -67,11 +67,6 @@ angular.module('starter', [
       templateUrl: 'templates/welcome/welcome.html',
       controller: 'WelcomeCtrl'
     })
-    .state('error', {
-      url: '/error',
-      templateUrl: 'templates/welcome/error.html',
-      controller: 'WelcomeCtrl'
-    })
     .state('loader', {
       url: '/loader',
       templateUrl: 'templates/welcome/loader.html',
