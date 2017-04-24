@@ -4,7 +4,9 @@ angular.module('starter.controllers', [])
 	$scope.trustPhoto = function(url){
 		return $sce.trustAsResourceUrl(url);		
 	}		
-	
+	if(loaded == false){
+		$state.go('loader');	
+	}
 	$scope.goToChatGlobal = function(url,slide,val) {
 		currentUser.selectedUser=val;
 		$state.go(url, val);  
@@ -1357,6 +1359,7 @@ angular.module('starter.controllers', [])
 					if($scope.ajaxRequest.user != ''){
 						$state.go('home.explore');
 						usPhotos = $scope.ajaxRequest.user.photos;
+						console.log(usPhotos);
 						sape = $scope.ajaxRequest.user.slike;
 					} else {
 						$state.go('welcome');
@@ -1374,22 +1377,7 @@ angular.module('starter.controllers', [])
 		  }		
 		}
 
-		loader();
-		/*
-		var init = function () {		
-			$scope.api = A.PDS.get({action: 'api' ,id: lid});
-			$scope.api.$promise.then(function(){
-				var response = $scope.api.response;
-				if(response == 1){
-					$state.go('error');
-				} else {
-					loader();
-				}
-			},
-		  function(){}
-		  );
-		}
-		*/
+		
 		if (window.cordova) {
 			document.addEventListener('deviceready', function () {
 				var notificationOpenedCallback = function(jsonData) { 
@@ -1400,11 +1388,11 @@ angular.module('starter.controllers', [])
 				window.plugins.OneSignal.enableNotificationsWhenActive(true);
 				window.plugins.OneSignal.getIds(function(ids) {
 				  oneSignalID = ids.userId;
-		    	  init();			  
+		    	  loader();			  
 				});	
 			}, false);
 		} else {
-			//init();
+			loader();
 		}
 	})
   
@@ -2057,19 +2045,7 @@ angular.module('starter.controllers', [])
 	$scope.discoverChat = true;
 	$scope.discoverSlike = true;
 
-	/*
-	if(app.chat_discover == 1){
-		$scope.discoverChat = true;
-	} else {
-		$scope.discoverChat = false;
-	}
-	if(app.slike_discover == 1){
-		$scope.discoverSlike = true;
-	} else {
-		$scope.discoverSlike = false;
-	}
-	*/	
-	  $scope.trustSrc = function(src) {
+    $scope.trustSrc = function(src) {
 		return $sce.trustAsResourceUrl(src);
 	  }  
 	
@@ -2127,33 +2103,6 @@ angular.module('starter.controllers', [])
 	}
 	$scope.w = w;
 
-	/*			
-	if( window.cordova && cordova.platformId === "android" ) {
-		var placement_id = 'f7f6d37d-77a5-4060-b221-3bac31340e83';		
-		var options = {
-		"buttonText":"Install", 
-		"buttonColor":"#ffffff", 
-		"categories":"category1,category2", 
-		"postback":"Postback", 
-		"backButtonCanClose":"false",
-		"mute":"false", 
-		"progressType":"clock", 
-		"progresscolor":" #ffffff",  
-		"videoLength":"default", 
-		"showClose":"true", 
-		"closeDelay":"",
-		"PreferredOrientation":"portrait"	
-		}
-		var fullscreen = new Appnext.Fullscreen(placement_id,options);		
-		var onSuccess = function(){
-			console.log("Ad loaded + show");
-		}
-		var onError = function(response){
-			console.log("Show ad error : "+response);
-		}
-		fullscreen.showAd(onSuccess,onError);
-	}	
-	*/
 	s_age = user.sage;
 	user_country = user.country;
 	user_city = user.city;	
@@ -2172,6 +2121,7 @@ angular.module('starter.controllers', [])
 		$state.go('home.settings');		
 	}	
 	$scope.loading = alang[8].text;
+
 	var gameAction = function (id,action) {
 		try {		  
 		  $scope.ajaxRequest2 = A.Meet.get({action: 'game_like',uid1: user.id, uid2: id, uid3: action});
@@ -2204,6 +2154,7 @@ angular.module('starter.controllers', [])
 			console.log("Error " + err);
 		}	
 	}
+
 	card();
     var resetCards = angular.copy(cards);
     $scope.cards = [];
@@ -2354,6 +2305,12 @@ angular.module('starter.controllers', [])
 		text: entry.text
 	  });
 	});
+	lang.forEach(function(entry) {					  
+	  $scope.lang.push({
+		id: entry,
+		text: entry.text
+	  });
+	});	
 	if(user.premium == 1){
 		$scope.notPremium = false;	
 	} else {
@@ -2371,34 +2328,6 @@ angular.module('starter.controllers', [])
 	};
 	$scope.freeCre = false;
 	
-	/*
-	var placement_id = 'f7f6d37d-77a5-4060-b221-3bac31340e83';
-	var  options = {
-	 "buttonText":"Install", 
-	"buttonColor":"#ffffff", 
-	"categories":"Social,Casino,Arcade,Action,Adventure,Racing,Puzzle", 
-	"postback":"Postback", 
-	"backButtonCanClose":"false",
-	"mute":"false", 
-	"progressType":"clock", 
-	"progresscolor":" #ffffff",  
-	"videoLength":"default", 
-	"showClose":"false", 
-	"closeDelay":"",
-	"PreferredOrientation":"portait"
-	}	
-	var ad = new Appnext.Fullscreen(placement_id, options);	
-	ad.showAd(onSuccess,onError);	
-	var onSuccess = function(){
-	}
-	var onError = function(response){
-	}
-	
-	
-	$scope.freeCredits = function(){
-	}
-	*/
-	//awlert.error('Email dont exist', 3000);
 	$scope.logout = function(){
 		var message = oneSignalID;
 		A.Query.get({action: 'logout', query: message});
@@ -2532,6 +2461,7 @@ angular.module('starter.controllers', [])
 		text: entry.text
 	  });
 	});
+
 	//ADMOB
 	if(show_ad == max_ad){
 		if(window.AdMob) window.AdMob.prepareInterstitial( {adId:adMobI, autoShow:true} );
@@ -3062,7 +2992,6 @@ angular.module('starter.controllers', [])
       if ($scope.isNew) $scope.isNew = false;
     }
 
-    // Warning: Demo purpose only. Stay away from DOM manipulating like this
     var _keepKeyboardOpen = function(target) {
       target = target || '#type-area';
 
@@ -3074,8 +3003,6 @@ angular.module('starter.controllers', [])
       });
     }
 
-
-    // Show the action sheet
     $scope.showUserOptions = function() {
       var hideSheet = $ionicActionSheet.show({
 		titleText: alang[14].text,									 
@@ -3122,7 +3049,6 @@ angular.module('starter.controllers', [])
       });
     }
 
-    // Onload
     var _initGiphy = function() {
       Giphy.trending()
         .then(function(gifs) {

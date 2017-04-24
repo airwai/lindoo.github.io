@@ -2,6 +2,7 @@ var show_ad = 0;
 var max_ad;
 var adMob;
 var discoverChat = true;
+var loaded = false;
 angular.module('starter', [
   'ionic',
   'awlert',
