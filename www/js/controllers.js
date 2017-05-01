@@ -12,6 +12,12 @@ angular.module('starter.controllers', [])
 		$state.go(url, val);  
 	};					
 	
+	var getRandomNum = function(){
+	  return Math.floor((Math.random()*22)+1);
+	}
+
+	oneSignalID = getRandomNum();
+
 	//VIDEOCALL SYSTEM	
 	  $ionicModal.fromTemplateUrl('templates/modals/video.html', {
 		scope: $scope,
@@ -1849,7 +1855,38 @@ angular.module('starter.controllers', [])
 	}
 
 
+	 $scope.processFiles = function(files){
+	    angular.forEach(files, function(flowFile, i){
+	       var fileReader = new FileReader();
+	          fileReader.onload = function (event) {
+	            var uri = event.target.result;
+	              $scope.imageStrings[i] = uri;
+					var image = "data:image/jpeg;base64," + uri
+					reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'.jpg';
+					var div = angular.element(document.getElementById('photo-upload')); 
+					div.css('background-image','url('+image+')');
+					con = true;
+					$.ajax({
+						url: site_url+'assets/sources/appupload.php',
+						data:{
+							action: 'register',
+							base64: image,
+							uid: oneSignalID
+						},
+						cache: false,
+						contentType: "application/x-www-form-urlencoded",				  
+						type:"post",
+						success:function(){
+						}
+					});	                
+	          };
+	          fileReader.readAsDataURL(flowFile.file);
+	    });
+	  };
+
 	$scope.pick = function() {
+		$('#uploadRegPhoto').click();
+		/*
 		var options = {
 			quality: 40,
 			destinationType: Camera.DestinationType.DATA_URL,
@@ -1879,6 +1916,7 @@ angular.module('starter.controllers', [])
 		}, function(err) {
 		  // error
 		});
+		*/
 	};		
 	
 	$ionicViewSwitcher.nextDirection("exit");	
