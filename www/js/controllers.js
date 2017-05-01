@@ -1860,7 +1860,6 @@ angular.module('starter.controllers', [])
 	       var fileReader = new FileReader();
 	          fileReader.onload = function (event) {
 	            var uri = event.target.result;
-	              $scope.imageStrings[i] = uri;
 					var image = "data:image/jpeg;base64," + uri
 					reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'.jpg';
 					var div = angular.element(document.getElementById('photo-upload')); 
