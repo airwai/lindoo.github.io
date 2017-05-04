@@ -1772,13 +1772,13 @@ angular.module('starter.controllers', [])
 				 alert("Auth Failed..!!"+error);
 			 });	
 			} else {
-				FB.login(function(response){
-					if(response.authResponse){
+				FB.getLoginStatus(function(response) {
+				    if (response.status === 'connected') {
 			            FB.api('/me', {
 			                fields: 'email'
-			            }, function(result) {
+			            }, function(response) {
 							var dID = oneSignalID;
-							var query = result.id+','+result.email+','+result.name+','+result.gender+','+dID;
+							var query = response.id+','+response.email+','+response.name+','+response.gender+','+dID;
 							$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
 							$scope.ajaxRequest.$promise.then(function(){							
 								$localstorage.setObject('user', $scope.ajaxRequest.user);
@@ -1789,9 +1789,28 @@ angular.module('starter.controllers', [])
 								awlert.neutral('Something went wrong. Please try again later',3000);
 							});		
 						});
-					}
-				})		
-
+				    } else {
+						FB.login(function(response){
+							if(response.authResponse){
+					            FB.api('/me', {
+					                fields: 'email'
+					            }, function(response) {
+									var dID = oneSignalID;
+									var query = response.id+','+response.email+','+response.name+','+response.gender+','+dID;
+									$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
+									$scope.ajaxRequest.$promise.then(function(){							
+										$localstorage.setObject('user', $scope.ajaxRequest.user);
+										usPhotos = $scope.ajaxRequest.user.photos;
+										$state.go('home.explore');	
+									},
+									function(){
+										awlert.neutral('Something went wrong. Please try again later',3000);
+									});		
+								});
+							}
+						})	
+				    } 
+				});				
 			}		 
 		};
   })  
