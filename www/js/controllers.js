@@ -1639,7 +1639,7 @@ angular.module('starter.controllers', [])
 
   })  
   
-  .controller('LoginCtrl', function($scope,$ionicPlatform,$http,sAuth, $state,$ionicViewSwitcher,$ionicModal,A,$cordovaOauth, $ionicLoading,awlert, $timeout,$localstorage,Navigation) {
+  .controller('LoginCtrl', function($scope,$ionicPlatform,$http,$state,$ionicViewSwitcher,$ionicModal,A,$cordovaOauth, $ionicLoading,awlert, $timeout,$localstorage,Navigation) {
 	var app = $localstorage.getObject('app');
 	var val = 0;
  	
@@ -1741,31 +1741,6 @@ angular.module('starter.controllers', [])
 	};
 	
 
-	 $window.fbAsyncInit = function() {
-	    FB.init({
-	      appId: '1811596079069411',
-	      channelUrl: 'templates/home/login.html',
-	      status: true,
-	      cookie: true,
-	      xfbml: true
-	    });
-	    sAuth.watchAuthenticationStatusChange();
-	  };
-
-	  (function(d){
-	    var js,
-	    id = 'facebook-jssdk',
-	    ref = d.getElementsByTagName('script')[0];
-	    if (d.getElementById(id)) {
-	      return;
-	    }
-	    js = d.createElement('script');
-	    js.id = id;
-	    js.async = true;
-	    js.src = "//connect.facebook.net/en_US/all.js";
-	    ref.parentNode.insertBefore(js, ref);
-	  }(document));
-
 	$scope.fb = function() {
 		if (window.cordova) {
 			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
@@ -1790,6 +1765,13 @@ angular.module('starter.controllers', [])
 				 alert("Auth Failed..!!"+error);
 			 });	
 			} else {
+			    FB.init({
+			      appId: '1811596079069411',
+			      channelUrl: 'templates/home/login.html',
+			      status: true,
+			      cookie: true,
+			      xfbml: true
+			    });				
 				FB.api('/me', function(result) {
 					var dID = oneSignalID;
 					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;

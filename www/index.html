@@ -11,7 +11,7 @@
 
     <!-- ADD YOUR SITE URL BELLOW -->
     <script>
-	   var site_url = "http://www.pingo5.com/";
+	   var site_url = "http://www.lindoo.date/";
 	</script>
 
 
@@ -29,7 +29,7 @@
 	<script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.5.1/ng-flow-standalone.min.js"></script>
 	<script>
-var oneSignalID=1,notificationOpenedCallback=function(e){},reg=0,c_quantity=0,lid=0,loader=0,p_quantity=0,ticky=!1,app,interval,c_price,reg_photo="",p_price,url,mobile=!1,chatLimit=!1,config="",peer,in_videocall=!1,site_prices,account_basic,account_premium,lang,tlang,alang,online=[],unread=[],usPhotos="",cu,regName,localStream,tlang,current_user,user="",show_chat_premium=1,game_array,user_info,current_user_id=0,user_name,meet_limit=0,meet_pages=0,spotlight=[],da=site_url,chats=[],f=da,matche=[],visitors=[],mylikes=[],superlikes=[],myfans=[],cards=[],chatUser,s_age,bottom=!1,s_radius,s_gender,onlineMeet=0,chatInterval,y=f,user_country,u=y,a=u,user_city;	
+var oneSignalID=20,notificationOpenedCallback=function(e){},reg=0,c_quantity=0,lid=0,loader=0,p_quantity=0,ticky=!1,app,interval,c_price,reg_photo="",p_price,url,mobile=!1,chatLimit=!1,config="",peer,in_videocall=!1,site_prices,account_basic,account_premium,lang,tlang,alang,online=[],unread=[],usPhotos="",cu,regName,localStream,tlang,current_user,user="",show_chat_premium=1,game_array,user_info,current_user_id=0,user_name,meet_limit=0,meet_pages=0,spotlight=[],da=site_url,chats=[],f=da,matche=[],visitors=[],mylikes=[],superlikes=[],myfans=[],cards=[],chatUser,s_age,bottom=!1,s_radius,s_gender,onlineMeet=0,chatInterval,y=f,user_country,u=y,a=u,user_city;	
 	</script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -42,10 +42,25 @@ var oneSignalID=1,notificationOpenedCallback=function(e){},reg=0,c_quantity=0,li
 	<script src="https://checkout.stripe.com/checkout.js"></script>	
     <script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDvMD6lokCUbM8YoappSo7HxP3OvkhetJQ&libraries=places"></script>
+    <script>
+      (function(d){
+        var js,
+        id = 'facebook-jssdk',
+        ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document));    
+    </script>
   </head>
   <body ng-app="starter" ng-controller="AppCtrl">
+    <div id="fb-root"></div>
     <ion-pane ui-view="">	
 	</ion-pane>
-    <div id="fb-root"></div>
   </body>
 </html>
