@@ -6,6 +6,7 @@ var loaded = false;
 angular.module('starter', [
   'ionic',
   'awlert',
+  'srvAuth',
   'flow',
   'starter.controllers',
   'starter.services',

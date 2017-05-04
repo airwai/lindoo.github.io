@@ -1639,7 +1639,7 @@ angular.module('starter.controllers', [])
 
   })  
   
-  .controller('LoginCtrl', function($scope,$ionicPlatform,$http, $state,$ionicViewSwitcher,$ionicModal,A,$cordovaOauth, $ionicLoading,awlert, $timeout,$localstorage,Navigation) {
+  .controller('LoginCtrl', function($scope,$ionicPlatform,$http,sAuth, $state,$ionicViewSwitcher,$ionicModal,A,$cordovaOauth, $ionicLoading,awlert, $timeout,$localstorage,Navigation) {
 	var app = $localstorage.getObject('app');
 	var val = 0;
  	
@@ -1740,31 +1740,71 @@ angular.module('starter.controllers', [])
 		$state.go(url);  
 	};
 	
-	$scope.fb = function() {
-	 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
-		$http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,name,email,gender", format: "json" }}).then(function(result) {
-			var dID = oneSignalID;
-			var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
-		$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
-		$scope.ajaxRequest.$promise.then(function(){							
-			$localstorage.setObject('user', $scope.ajaxRequest.user);
-			usPhotos = $scope.ajaxRequest.user.photos;
-			$state.go('home.explore');	
-		},
-		function(){
-			awlert.neutral('Something went wrong. Please try again later',3000);
-		});
-		
-		}, function(error) {
-		alert("There was a problem getting your profile.  Check the logs for details.");
-			console.log(error);
-		});
-	 }, function(error) {
-		 alert("Auth Failed..!!"+error);
-	 });	
 
-	};
-	
+	 $window.fbAsyncInit = function() {
+	    FB.init({
+	      appId: '1811596079069411',
+	      channelUrl: 'templates/home/login.html',
+	      status: true,
+	      cookie: true,
+	      xfbml: true
+	    });
+	    sAuth.watchAuthenticationStatusChange();
+	  };
+
+	  (function(d){
+	    var js,
+	    id = 'facebook-jssdk',
+	    ref = d.getElementsByTagName('script')[0];
+	    if (d.getElementById(id)) {
+	      return;
+	    }
+	    js = d.createElement('script');
+	    js.id = id;
+	    js.async = true;
+	    js.src = "//connect.facebook.net/en_US/all.js";
+	    ref.parentNode.insertBefore(js, ref);
+	  }(document));
+
+	$scope.fb = function() {
+		if (window.cordova) {
+			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
+				$http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,name,email,gender", format: "json" }}).then(function(result) {
+					var dID = oneSignalID;
+					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
+				$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
+				$scope.ajaxRequest.$promise.then(function(){							
+					$localstorage.setObject('user', $scope.ajaxRequest.user);
+					usPhotos = $scope.ajaxRequest.user.photos;
+					$state.go('home.explore');	
+				},
+				function(){
+					awlert.neutral('Something went wrong. Please try again later',3000);
+				});
+				
+				}, function(error) {
+				alert("There was a problem getting your profile.  Check the logs for details.");
+					console.log(error);
+				});
+			 }, function(error) {
+				 alert("Auth Failed..!!"+error);
+			 });	
+			} else {
+				FB.api('/me', function(result) {
+					var dID = oneSignalID;
+					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
+					$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
+					$scope.ajaxRequest.$promise.then(function(){							
+						$localstorage.setObject('user', $scope.ajaxRequest.user);
+						usPhotos = $scope.ajaxRequest.user.photos;
+						$state.go('home.explore');	
+					},
+					function(){
+						awlert.neutral('Something went wrong. Please try again later',3000);
+					});		
+				}
+			}		 
+		};
   })  
 
   .controller('RegisterCtrl', function($scope, $state,$ionicViewSwitcher,$ionicModal,A,awlert, $ionicLoading, $timeout,$localstorage,$cordovaCamera, $cordovaFile, $cordovaFileTransfer, $cordovaDevice) {
@@ -1884,8 +1924,7 @@ angular.module('starter.controllers', [])
 	  };
 
 	$scope.pick = function() {
-		$('#uploadRegPhoto').click();
-		/*
+		if (window.cordova) {
 		var options = {
 			quality: 40,
 			destinationType: Camera.DestinationType.DATA_URL,
@@ -1915,7 +1954,9 @@ angular.module('starter.controllers', [])
 		}, function(err) {
 		  // error
 		});
-		*/
+		} else {
+			$('#uploadRegPhoto').click();
+		}
 	};		
 	
 	$ionicViewSwitcher.nextDirection("exit");	
