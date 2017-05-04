@@ -1747,7 +1747,7 @@ angular.module('starter.controllers', [])
       xfbml: true,
       version: 'v2.2'
     });	
-    
+
 	$scope.fb = function() {
 		if (window.cordova) {
 			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
@@ -1774,7 +1774,7 @@ angular.module('starter.controllers', [])
 			} else {			
 	            FB.api('/me', {
 	                fields: 'email'
-	            }, function(response) {
+	            }, function(result) {
 					var dID = oneSignalID;
 					var query = result.id+','+result.email+','+result.name+','+result.gender+','+dID;
 					$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
