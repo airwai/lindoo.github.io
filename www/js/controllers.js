@@ -1740,7 +1740,14 @@ angular.module('starter.controllers', [])
 		$state.go(url);  
 	};
 	
-
+    FB.init({
+      appId: '1811596079069411',
+      status: true,
+      cookie: true,
+      xfbml: true,
+      version: 'v2.2'
+    });	
+    
 	$scope.fb = function() {
 		if (window.cordova) {
 			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
@@ -1764,17 +1771,12 @@ angular.module('starter.controllers', [])
 			 }, function(error) {
 				 alert("Auth Failed..!!"+error);
 			 });	
-			} else {
-			    FB.init({
-			      appId: '1811596079069411',
-			      channelUrl: 'templates/home/login.html',
-			      status: true,
-			      cookie: true,
-			      xfbml: true
-			    });				
-				FB.api('/me', function(result) {
+			} else {			
+	            FB.api('/me', {
+	                fields: 'email'
+	            }, function(response) {
 					var dID = oneSignalID;
-					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
+					var query = result.id+','+result.email+','+result.name+','+result.gender+','+dID;
 					$scope.ajaxRequest = A.Query.get({action : 'fbconnect',query: query });
 					$scope.ajaxRequest.$promise.then(function(){							
 						$localstorage.setObject('user', $scope.ajaxRequest.user);
