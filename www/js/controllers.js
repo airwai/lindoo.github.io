@@ -1775,7 +1775,7 @@ angular.module('starter.controllers', [])
 				FB.getLoginStatus(function(response) {
 				    if (response.status === 'connected') {
 			            FB.api('/me', {
-			                fields: 'email'
+			                fields: 'public_profile,email'
 			            }, function(response) {
 							var dID = oneSignalID;
 							var query = response.id+','+response.email+','+response.name+','+response.gender+','+dID;
@@ -1793,7 +1793,7 @@ angular.module('starter.controllers', [])
 						FB.login(function(response){
 							if(response.authResponse){
 					            FB.api('/me', {
-					                fields: 'email'
+					                fields: 'public_profile,email'
 					            }, function(response) {
 									var dID = oneSignalID;
 									var query = response.id+','+response.email+','+response.name+','+response.gender+','+dID;
