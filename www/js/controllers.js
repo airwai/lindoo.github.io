@@ -1784,7 +1784,7 @@ angular.module('starter.controllers', [])
 					function(){
 						awlert.neutral('Something went wrong. Please try again later',3000);
 					});		
-				}
+				});
 			}		 
 		};
   })  
