@@ -1741,7 +1741,7 @@ angular.module('starter.controllers', [])
 	};
 	
     FB.init({
-      appId: '1811596079069411',
+      appId: '479672698869546',
       status: true,
       cookie: true,
       xfbml: true,
