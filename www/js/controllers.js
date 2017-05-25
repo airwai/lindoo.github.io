@@ -545,7 +545,11 @@ angular.module('starter.controllers', [])
 			$scope.premium_custom = user.id+','+c;			
 			$scope.premiumModal.hide();
 			var paypalU = site_url +'app/paypal.php?type=2&amount='+p_price+'&custom='+$scope.premium_custom;
-			cordova.InAppBrowser.open(paypalU, '_blank', 'location=yes');
+			if (window.cordova) {
+				cordova.InAppBrowser.open(paypalU, '_blank', 'location=yes');
+			} else {
+				window.open(paypalU, '_blank', 'location=yes');
+			}
 		}
 	}
     $scope.closePremiumModal = function() {
@@ -607,7 +611,11 @@ angular.module('starter.controllers', [])
 			if(val == 1){
 				var c = $scope.credits_custom;
 				var paypalU = site_url +'app/paypal.php?type=1&amount='+c_price+'&custom='+c;
-				cordova.InAppBrowser.open(paypalU, '_blank', 'location=yes');
+				if (window.cordova) {
+					cordova.InAppBrowser.open(paypalU, '_blank', 'location=yes');
+				} else {
+					window.open(paypalU, '_blank', 'location=yes');
+				}
 			}
 			if(val == 2){
 				$scope.creditsModal.hide();
@@ -664,7 +672,11 @@ angular.module('starter.controllers', [])
 						var callback = encodeURI(config.site_url);
 						name = encodeURI(name);
 						var href= 'http://pay.fortumo.com/mobile_payments/'+config.fortumo+'?amount='+c_quantity+'&callback_url='+callback+'&credit_name='+name+'&cuid='+user.id+'&currency='+config.currency+'&display_type=user&price='+c_price+'&v=web&sig='+md5;
-						cordova.InAppBrowser.open(href, '_blank', 'location=yes');				
+						if (window.cordova) {
+							cordova.InAppBrowser.open(href, '_blank', 'location=yes');
+						} else {
+							window.open(href, '_blank', 'location=yes');
+						}				
 					}
 				});				
 			}	
@@ -1909,9 +1921,11 @@ angular.module('starter.controllers', [])
 	          fileReader.onload = function (event) {
 	            var uri = event.target.result;
 					var image = uri;
-					reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'.jpg';
+					var r = Math.floor((Math.random() * 10000000000) + 1);
+					reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'_'+r+'.jpg';
 					var div = angular.element(document.getElementById('photo-upload')); 
 					div.css('background-image','url('+image+')');
+					$('#photo-upload i').hide();
 					con = true;
 					$.ajax({
 						url: site_url+'assets/sources/appupload.php',
@@ -1945,6 +1959,7 @@ angular.module('starter.controllers', [])
 			reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'.jpg';
 			var div = angular.element(document.getElementById('photo-upload')); 
 			div.css('background-image','url('+image+')');
+			$('#photo-upload i').hide();
 			con = true;
 			$.ajax({
 				url: site_url+'assets/sources/appupload.php',

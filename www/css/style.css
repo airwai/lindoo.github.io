@@ -2384,7 +2384,7 @@ margin-left: 10px;
   }
 }
 
-@media only screen and (max-height: 560px) {
+@media only screen and (max-height: 520px) {
 	.login-logo img{
 		top:-10px;
 		margin-top:0px;
@@ -2398,11 +2398,11 @@ margin-left: 10px;
 	.login-logo .upload i{
 		font-size:3rem;
 	}			
-	.login-footer{
-		display:none;	
+	.login-footer p{
+			margin-top: -10px;
 	}
 	.social-container{
-		display:none;	
+		display:none !important;	
 	}
 }
 
