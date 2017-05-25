@@ -1753,7 +1753,7 @@ angular.module('starter.controllers', [])
 	};
 	
     FB.init({
-      appId: '479672698869546',
+      appId: '1346501938790409',
       status: true,
       cookie: true,
       xfbml: true,
@@ -1762,7 +1762,7 @@ angular.module('starter.controllers', [])
 
 	$scope.fb = function() {
 		if (window.cordova) {
-			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
+			 $cordovaOauth.facebook("1346501938790409", ["email"]).then(function(result) {
 				$http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,name,email,gender", format: "json" }}).then(function(result) {
 					var dID = oneSignalID;
 					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
