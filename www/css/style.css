@@ -2257,6 +2257,18 @@ margin-left: 10px;
 .btn-decline:hover { background: rgba(203,90,90,1); }
 .btn-decline:active { background: rgba(141,62,62,1); box-shadow: inset 0 0 3px rgba(0,0,0,0.5); }
 
+.ad1{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	margin: 3px;
+}
+.ad2{
+	position: relative;
+	width: 100%;
+	height: 100px;
+	margin: 3px;
+}
 
 .smellycat {
     -webkit-transition:all 0.2s linear 0s;

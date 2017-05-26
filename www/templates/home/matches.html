@@ -14,7 +14,9 @@
   </ion-nav-title>
   
   <ion-content style="margin-bottom:50px;" delegate-handle="userMessageScroll">
-		
+	    <div class="ad2" ng-if="ad2">
+	      <div ng-bind-html="ads2"></div>
+	    </div>  		
 		<!--RECENT MESSAGES -->	
 		<ion-list   can-swipe="listCanSwipe" delegate-handle="chat-list" ng-if="show == 1" >	  
 			<ion-item class="" style="border:none" ng-repeat="p in matches track by $index " ng-if="$index < 25" nav-transition="none" ng-click="changePage('home.messaging','right',p)">

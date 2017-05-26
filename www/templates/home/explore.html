@@ -78,7 +78,9 @@
         </td-card>
       </td-cards>
     </div>
-	
+	  <div class="ad1" ng-if="ad1">
+      <div ng-bind-html="ads"></div>
+    </div>
     <div class="card-actions padder-copatene" ng-show="!noSlike" horizontal layout around-justified center>
 
       <div class="card-action" ng-if="discoverChat">

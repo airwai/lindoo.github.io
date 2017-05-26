@@ -50,6 +50,9 @@
 				</div>
 			</div>
 			<div class="search-container" >
+		    <div class="ad1" ng-if="ad1">
+		      <div ng-bind-html="ads"></div>
+		    </div>			
 			  <div ng-show="meet.length == 0" vertical layout center flex >
 				<div class="text-muted text-center l-h" style="margin-top:250px;">
 				  {{alang[117].text}}

@@ -28,6 +28,9 @@
       </div>
     </div>
 	<h2 class="mi-pollita text-center" style="padding:0;margin:0">{{name}}</h2>
+    <div class="ad2" ng-if="ad2">
+      <div ng-bind-html="ads2"></div>
+    </div>  
     <div class="list mi-pollita" style="border:none;margin-top:25px">	
       <div class="item item-icon-left insta-bg text-center" ng-if="freeCre" ng-click="freeCredits()" style="width:100%;margin-left:0;padding-left:0;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
         <div style="color:#fff;font-size:14px">

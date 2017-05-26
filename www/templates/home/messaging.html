@@ -23,6 +23,10 @@
 
   <ion-content  delegate-handle="userMessageScroll"   on-swipe-right="goToChat()" style="padding-bottom:100px;border-top:2px solid #eee;">
       <!-- Chat bubbles -->
+
+    <div class="ad1" ng-if="ad1">
+      <div ng-bind-html="ads"></div>
+    </div>	      
       <div class="list chat-bubble" >
 	    <div class="timestamp" ng-if="moreMen" ng-click="loadMoreMen(15)">{{alang[106].text}} {{totalMen}} {{alang[107].text}}</div>
 		

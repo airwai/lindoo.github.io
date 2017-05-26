@@ -1463,6 +1463,18 @@ angular.module('starter.controllers', [])
 		text: entry.text
 	  });
 	});
+
+	app = $localstorage.getObject('app');
+	if(app.ads){
+		$scope.ad1 = true;
+		setTimeout(function(){
+		   $scope.ads = app.ads;
+		   $scope.$apply();
+		},1050);	
+	} else {
+		$scope.ad1 = false;
+	}
+
 	user = $localstorage.getObject('user');
 	prices = $localstorage.getObject('prices');
 	if(user.s_radius >= 1000){
@@ -1762,7 +1774,7 @@ angular.module('starter.controllers', [])
 
 	$scope.fb = function() {
 		if (window.cordova) {
-			 $cordovaOauth.facebook("1346501938790409", ["email"]).then(function(result) {
+			 $cordovaOauth.facebook("1811596079069411", ["email"]).then(function(result) {
 				$http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: result.access_token, fields: "id,name,email,gender", format: "json" }}).then(function(result) {
 					var dID = oneSignalID;
 					var query = result.data.id+','+result.data.email+','+result.data.name+','+result.data.gender+','+dID;
@@ -2145,6 +2157,16 @@ angular.module('starter.controllers', [])
 	$scope.newChat = false;
 	$scope.discoverChat = true;
 	$scope.discoverSlike = true;
+	if(app.ads){
+		$scope.ad1 = true;
+		setTimeout(function(){
+		   $scope.ads = app.ads;
+		   $scope.$apply();
+		},1050);	
+	} else {
+		$scope.ad1 = false;
+	}
+	
 
     $scope.trustSrc = function(src) {
 		return $sce.trustAsResourceUrl(src);
@@ -2417,6 +2439,18 @@ angular.module('starter.controllers', [])
 	} else {
 		$scope.notPremium = true;	
 	}
+
+	app = $localstorage.getObject('app');
+	if(app.ads2){
+		$scope.ad2 = true;
+		setTimeout(function(){
+		   $scope.ads2 = app.ads2;
+		   $scope.$apply();
+		},1050);	
+	} else {
+		$scope.ad2 = false;
+	}
+
 	$scope.id = user.id;
 	$scope.city = user.city;
 	$scope.age = user.age;
@@ -2692,6 +2726,19 @@ angular.module('starter.controllers', [])
 		$scope.show = val;	
 		 viewScroll.scrollTop(true);
 	}
+
+	app = $localstorage.getObject('app');
+	if(app.ads2){
+		$scope.ad2 = true;
+		setTimeout(function(){
+		   $scope.ads2 = app.ads2;
+		   $scope.$apply();
+		},1050);	
+	} else {
+		$scope.ad2 = false;
+	}
+
+
 	//ADMOB
 	if(show_ad == max_ad){
 		if(window.AdMob) window.AdMob.prepareInterstitial( {adId:adMobI, autoShow:true} );
@@ -2761,6 +2808,18 @@ angular.module('starter.controllers', [])
 	$scope.alang = [];
 	$scope.tlang = [];
 	$scope.checkFocus = false;
+
+	app = $localstorage.getObject('app');
+	if(app.ads){
+		$scope.ad1 = true;
+		setTimeout(function(){
+		   $scope.ads = app.ads;
+		   $scope.$apply();
+		},1050);	
+	} else {
+		$scope.ad1 = false;
+	}
+
 	//ADMOB
 	if(show_ad == max_ad){
 		if(window.AdMob) window.AdMob.prepareInterstitial( {adId:adMobI, autoShow:true} );
