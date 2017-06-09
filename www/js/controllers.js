@@ -1933,7 +1933,7 @@ angular.module('starter.controllers', [])
 	          fileReader.onload = function (event) {
 	            var uri = event.target.result;
 					var image = uri;
-					var r = Math.floor((Math.random() * 10000000000) + 1);
+					var r = Math.floor((Math.random() * 225) + 4000);
 					reg_photo = site_url+'assets/sources/uploads/'+oneSignalID+'_'+r+'.jpg';
 					var div = angular.element(document.getElementById('photo-upload')); 
 					div.css('background-image','url('+image+')');
