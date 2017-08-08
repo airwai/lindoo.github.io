@@ -1,16 +1,15 @@
-<ion-view title="Tinder">
-  <ion-nav-buttons side="left">
-    <button class="button button-clear" nav-direction="back"  ui-sref="home.settings">
-		<i class="icon ion-arrow-left-c"></i>
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-title>
-    <button class="button button-clear m-t-xs">
-	  <div class="text-center mi-pollita" >
-		{{title}}
-	  </div>
-    </button>
+<ion-view title="">
+  <ion-nav-title >
+    <div class="navigation-bar  navigation-bar--no-shadow  has-wide-sides ">
+        <div class="navigation-bar__primary">
+            <div class="navigation-bar__icon js-navigation" ng-click="goTo('home.menu','right');" >
+              <i class="icon-svg ion-navicon-round"></i>
+              
+            </div>
+        </div>
+        <div class="navigation-bar__title comforta" data-qa="navbar-title">{{title}}</div>
+        <div class="navigation-bar__secondary"></div>     
+    </div>    
   </ion-nav-title>
   
   <ion-content style="margin-bottom:50px;" delegate-handle="userMessageScroll">
@@ -18,7 +17,7 @@
 		<ion-list ng-if="show == 1" >	
 			  <div ng-show="noMatches" >
 					<div class="credits-section text-center">
-						<h5 class="mi-pollita" style="color:#BFC5D5">{{alang[70].text}}</h5>					
+						<h5 class="comforta" style="color:#BFC5D5">{{alang[70].text}}</h5>					
 						<div class="wrapper text-center">
 						  <div class="pos-rlt">
 							<div class="thumb-xxl rounded profileP border-profile" style="background-image:url({{photo}});height:{{w}}px;width:{{w}}px;" ></div>
@@ -48,7 +47,7 @@
 		<ion-list ng-if="show == 2" >	
 			  <div ng-show="noFans" >
 					<div class="credits-section text-center">
-						<h5 class="mi-pollita" style="color:#BFC5D5">{{alang[71].text}}</h5>					
+						<h5 class="comforta" style="color:#BFC5D5">{{alang[71].text}}</h5>					
 						<div class="wrapper text-center">
 						  <div class="pos-rlt">
 							<div class="thumb-xxl rounded profileP border-profile" style="background-image:url({{photo}});height:{{w}}px;width:{{w}}px;" ></div>
@@ -80,7 +79,7 @@
 		<ion-list ng-if="show == 4" >	
 			  <div ng-show="noSuperLike" >
 					<div class="credits-section text-center">
-						<h5 class="mi-pollita" style="color:#BFC5D5">{{alang[71].text}}</h5>					
+						<h5 class="comforta" style="color:#BFC5D5">{{alang[71].text}}</h5>					
 						<div class="wrapper text-center">
 						  <div class="pos-rlt">
 							<div class="thumb-xxl rounded profileP border-profile" style="background-image:url({{photo}});height:{{w}}px;width:{{w}}px;" ></div>
@@ -112,7 +111,7 @@
 		<ion-list  ng-if="show == 3" >	 
 			  <div ng-show="noLikes" >
 					<div class="credits-section text-center" style="margin-top:100px">
-						<h5 class="mi-pollita" style="color:#BFC5D5">{{alang[72].text}}</h5>
+						<h5 class="comforta" style="color:#BFC5D5">{{alang[72].text}}</h5>
 						<a ui-sref="home.explore">{{alang[73].text}}</a>
 					</div>
 			  </div>		
@@ -144,18 +143,15 @@
 			<br>                   
 		</div>
 	</div> 	
-	<ion-tabs class="tabs-stable mi-pollita tabs-icon-top animated fadeIn upp">
-	  <ion-tab title="{{alang[77].text}}" badge="" badge-style="opacity-badge" class="mi-pollita" icon-on="ion-ios-star" icon-off="ion-ios-star-outline" on-select="onTabShow(2,'{{alang[77].text}}')">
-	  </ion-tab>
-
-	  <ion-tab title="{{alang[78].text}}" class="animated fadeIn mi-pollita" icon-on="ion-ios-heart" icon-off="ion-ios-heart-outline" on-select="onTabShow(1,'{{alang[78].text}}')">
-	  </ion-tab>
-
-	  <ion-tab title="Super Likes" class="animated fadeIn mi-pollita" icon-on="ion-ios-bolt" icon-off="ion-ios-bolt-outline" on-select="onTabShow(4,'Super likes')">
-	  </ion-tab>	  
-
-	  <ion-tab title="{{alang[79].text}}" badge="" class="mi-pollita" icon-on="ion-ios-checkmark" icon-off="ion-ios-checkmark-outline"  on-select="onTabShow(3,'{{alang[79].text}}')">
-	  </ion-tab>
-
-	</ion-tabs> 	
+	<div class="tabs tabs-bottom visible" style="background: #7000E3;border-color: #fff">
+	    <div class="tab js-contact-list-folders__item" ng-model="tab1" ng-click="onTabShow(2,'{{alang[77].text}}')" >
+	        <div class="tab__label"> <img src="img/icon-circle-liked-you.png" width="30" height="30"></div>
+	    </div>
+	    <div class="tab js-contact-list-folders__item" ng-model="tab2" ng-click="onTabShow(1,'{{alang[78].text}}')">
+	        <div class="tab__label"><img src="img/vote-match.png" width="30" height="30"></div>
+	    </div>  
+	    <div class="tab js-contact-list-folders__item" ng-model="tab3" ng-click="onTabShow(3,'{{alang[79].text}}')">
+	        <div class="tab__label"><img src="img/vote-yes-voted.png" width="30" height="30"></div>
+	    </div>   	                          
+	</div>
 </ion-view>

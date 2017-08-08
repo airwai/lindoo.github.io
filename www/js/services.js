@@ -22,8 +22,8 @@ angular.module('starter.services', [])
 	
 	.service('Navigation', function($state) {
 	  //directly binding events to this context
-	  this.goNative = function(view, data, direction) {
-		$state.go(view, data);
+	  this.goNative = function(view, direction,data) {
+		$state.go(view,data);
 		window.plugins.nativepagetransitions.slide({
 			"direction": direction
 		  },
@@ -52,19 +52,18 @@ angular.module('starter.services', [])
 	.factory('A', ['$resource',
 		function($resource){;
 			return {
-				Query: $resource(a+e+'action=:action&query=:query', {action:'@action',query: '@query'}),				
-				Game: $resource(a+e+'action=:action&id=:id', {action:'@action',id: '@id'}),					
-				CardStack: $resource(a+e+'profileID=:profileID&action=:action&limit=:limit', {profileID: '@profileID',action: '@action',limit: '@limit'}),
-				User: $resource(a+e+'action=:action&login_email=:login_email&login_pass=:login_pass&dID=:dID', {action:'@action',login_email: '@login_email',login_pass: '@login_pass',dID: '@dID'}),
-				Reg: $resource(a+e+'action=:action&reg_name=:reg_name&reg_email=:reg_email&reg_pass=:reg_pass&reg_birthday=:reg_birthday&reg_gender=:reg_gender&reg_looking=:reg_looking&reg_photo=:reg_photo&dID=:dID', {action:'@action',reg_email: '@reg_email',reg_pass: '@reg_pass',reg_name: '@reg_name',reg_photo: '@reg_photo',dID: '@dID'}),
+				Query: $resource(site_url+'/requests/api.php?action=:action&query=:query', {action:'@action',query: '@query'}),
+				RT: $resource(site_url+'/requests/rt.php?action=:action&query=:query', {action:'@action',query: '@query'}),				
+				Game: $resource(site_url+'/requests/api.php?action=:action&id=:id', {action:'@action',id: '@id'}),					
+				User: $resource(site_url+'/requests/api.php?action=:action&login_email=:login_email&login_pass=:login_pass&dID=:dID', {action:'@action',login_email: '@login_email',login_pass: '@login_pass',dID: '@dID'}),
+				Reg: $resource(site_url+'/requests/api.php?action=:action&reg_name=:reg_name&reg_email=:reg_email&reg_pass=:reg_pass&reg_birthday=:reg_birthday&reg_gender=:reg_gender&reg_looking=:reg_looking&reg_photo=:reg_photo&dID=:dID', {action:'@action',reg_email: '@reg_email',reg_pass: '@reg_pass',reg_name: '@reg_name',reg_photo: '@reg_photo',dID: '@dID'}),
 				PDS: $resource('https://www.premiumdatingscript.com/php/func.php?action=:action&id=:id', {action:'@action',id: '@id'}),
-				Chat: $resource(a+e+'action=:action&uid1=:uid1&uid2=:uid2', {action:'@action',uid1: '@uid1',uid2: '@uid2'}),
-				Meet: $resource(a+e+'action=:action&uid1=:uid1&uid2=:uid2&uid3=:uid3', {action:'@action',uid1: '@uid1',uid2: '@uid2',uid3: '@uid3'}),				
-				ProfileDetails: $resource(a+e+'profileID=:profileID', {profileID: '@profileID'}),
-				Device: $resource(a+e+'action=:action&dID=:dID', {action:'@action', dID: '@dID'}),
-				Cuser: $resource(a+e+'action=:action&dID=:dID', {action:'@action', dID: '@dID'}),				
-				Config: $resource(a+e+'action=:action', {action:'@action'}),			
-				ChatDetails: $resource(a+'requests/chat.php?profileID=:profileID', {profileID: '@profileID'}),
+				Chat: $resource(site_url+'/requests/api.php?action=:action&uid1=:uid1&uid2=:uid2', {action:'@action',uid1: '@uid1',uid2: '@uid2'}),
+				Meet: $resource(site_url+'/requests/api.php?action=:action&uid1=:uid1&uid2=:uid2&uid3=:uid3', {action:'@action',uid1: '@uid1',uid2: '@uid2',uid3: '@uid3'}),				
+				Device: $resource(site_url+'/requests/api.php?action=:action&dID=:dID', {action:'@action', dID: '@dID'}),
+				Cuser: $resource(site_url+'/requests/api.php?action=:action&dID=:dID', {action:'@action', dID: '@dID'}),				
+				Config: $resource(site_url+'/requests/api.php?action=:action', {action:'@action'}),			
+				ChatDetails: $resource(site_url+'requests/chat.php?profileID=:profileID', {profileID: '@profileID'}),
 			};
 	}])	
     .factory('preloader', function( $q, $rootScope ) {

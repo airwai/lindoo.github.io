@@ -1,18 +1,16 @@
-<ion-view title="Tinder">
-  <ion-nav-buttons side="left">
-    <button class="button button-clear" nav-direction="back"  ui-sref="home.settings">
-		<i class="icon ion-arrow-left-c"></i>
-    </button>
-  </ion-nav-buttons>
-
-  <ion-nav-title>
-    <button class="button button-clear m-t-xs">
-	  <div class="text-center mi-pollita" >
-		{{title}}
-	  </div>
-    </button>
+<ion-view title="">
+  <ion-nav-title >
+    <div class="navigation-bar  navigation-bar--no-shadow  has-wide-sides ">
+        <div class="navigation-bar__primary">
+            <div class="navigation-bar__icon js-navigation" ng-click="goTo('home.menu','right');" >
+              <i class="icon-svg ion-navicon-round"></i>
+              
+            </div>
+        </div>
+        <div class="navigation-bar__title comforta" data-qa="navbar-title">Visitors</div>
+        <div class="navigation-bar__secondary"></div>     
+    </div>    
   </ion-nav-title>
-  
   <ion-content delegate-handle="userMessageScroll">
 		<!--MY VISITORS -->
 		<ion-list ng-if="show == 1" >	
@@ -32,16 +30,22 @@
 					</div>
 			  </div>
 			<div ng-class="!canSeeVisitors ? 'sblur' : ''">
-			<ion-item class="" style="border:none" ng-repeat="p in visitors track by $index" ng-click="changePage('home.messaging','right',p)">
-			  <div class="thumb-md rounded pull-left m-l m-r-md profileP" style="margin-top:10px;background-image:url('{{p.photo}}');width:60px;height:60px;"></div>
-			  <div class="text-lg b-b b-light clear padder-v">
-
-				<div class="text-c chat-name" style="display:inline-table">{{p.name}} <span class="chat-status" ng-if="p.status == 1" style="background:#51B80E" ></span></div>
-							
-				<div style="position:relative;width:100%;">
-					<p class="text-muted chat-last-m paQueRespete">{{p.last_m}}</p>
-				</div>
-			  </div>						  
+			<ion-item class="" style="border:none;height: 110px" ng-repeat="p in visitors track by $index" ng-click="changePage('home.messaging','right',p)">
+            <div class="contact-list__contacts">
+                <div class="contact-list-item js-contact-list-item">
+                    <div class="brick contact-list-item__userpic">
+                        <div class="brick__image"><img src="{{p.photo}}" alt=""></img></div>                                 
+                    </div>
+                    <div class="contact-list-item__preview">
+                        <div class="contact-list-item__name"><b class="contact-list-item__name_">{{p.name}}</b>
+                        <i class="online-status online-status--online" ng-if="p.status == 1"></i></div>
+                        <div class="contact-list-item__message">{{p.last_m}} </div>
+                    </div>
+                    <img src="img/vote-match.png" ng-if="p.match == 1"
+                     style="margin-right:5px;width:18px;border-radius: 50%;">
+                    <img src="img/vip.png" ng-if="p.premium == 1" style="width:20px;border-radius: 50%;border:1px solid #FFE54F">                                 
+                </div>
+            </div>									  
 			</ion-item>	
 			</div>
 		</ion-list>		

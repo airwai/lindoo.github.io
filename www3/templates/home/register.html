@@ -1,0 +1,40 @@
+<ion-view title="Belloo" hide-nav-bar="true">
+  <ion-nav-title>
+    <div class="navigation-bar"   >
+        <div class="navigation-bar__primary">
+        </div>
+        <div class="navigation-bar__title">
+            <div class="navigation-bar__logo" style="z-index: 999;">
+              <img src="img/logo.png" />
+            </div>
+        </div>
+        <div class="navigation-bar__secondary"></div>
+    </div>
+  </ion-nav-title>
+<ion-content  scroll="false" ng-style="{height: iframeHeight + 'px'}" class="bg-login">
+
+
+
+  <div class="wrapper nop-nom" fit vertical layout justified>
+	<div class="login-logo" >
+		<div id="photo-upload" ng-click="pick()"  class="upload animated fadeIn">
+			<i class="icon ion-ios-plus-empty"></i>
+		</div>
+	</div>
+	<div class="login-form animated fadeIn">
+		<input type="text" class="login-input" ng-model="user.reg_name" placeholder="{{lname}}"/>	
+		<input type="text" class="login-input" ng-model="user.reg_email" placeholder="{{lemail}}"/>
+		<input type="password" id="regpass" ng-model="user.reg_pass" ng-keyup="count = $count + 1" ng-init="count=0" ng-minlength="4" required class="login-input" placeholder="{{lpass}}"/>
+		<div class="login-btn" ng-class="{active: isActive}" ng-if="!regBtn" ng-click="next(user)">
+			<span><center>{{nexttext}}</center></span>
+		</div>	
+		<div class="login-loader" ng-if="regBtn">
+			<center><div class="loader02"></div></center>
+		</div>		
+	</div>
+	<div class="login-footer" nav-transition="none" ui-sref="home.welcome">
+		<p><span data-alid="27"></span> <b data-lid="1"></b></p>
+	</div>
+  </div>
+  </ion-content>
+</ion-view>
