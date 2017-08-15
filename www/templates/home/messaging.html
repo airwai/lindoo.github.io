@@ -116,7 +116,7 @@
         </div>                                        
 
     </div>
-    <div class="chat-send is-disabled" ng-click="sendText(message);message = ' ';" >{{alang[110].text}}</div>
+    <div class="chat-send is-disabled" ng-click="sendText(message);message = '';" >{{alang[110].text}}</div>
 </div>	
 
   <ion-content  delegate-handle="userMessageScroll"   on-swipe-right="goToChat()" style="background:#fff;padding-bottom:20px;border-top:2px solid #eee;">
@@ -259,5 +259,6 @@
          flow-name="uploader.flow"
          flow-files-added="processFiles($files)">
       <button flow-btn type="file" id="uploadSendPhoto" style="display: none;"></button>
-     </div>    
+     </div>
+<audio id="chatSound" type="audio/wav" preload="false" style="display: none"><source src='audio/inchat-sound.mp3' /></audio>         
 </ion-view>

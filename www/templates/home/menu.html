@@ -70,15 +70,15 @@
                         </div>
                         <div class="menu-slide-section" data-view-id="88">
                             <div class="menu-navigation" style="position: fixed;background:#7000E3">
-                                <div class="font-medium menu-navigation-item menu-navigation-item--profile  js-menu-link js-touchable qa-menu-link" ng-click="goTo('home.profile','left');">
+                                <div class="font-medium menu-navigation-item menu-navigation-item--profile  js-menu-link js-touchable qa-menu-link" style="margin-top:20px;" ng-click="goTo('home.profile','left');">
                                     <div class="menu-navigation-item_">
                                         <div class="brick menu-navigation-item__avatar">
-                                            <div class="brick__image"><img src="{{me.profile_photo}}"></div>
+                                            <div class="brick__image" ng-click="goTo('home.profile','left');"><img src="{{me.profile_photo}}"></div>
                                         </div>
                                         <div class="menu-navigation-item__name" style="font-size:11px;margin-top:5px">{{me.first_name}}</div>
                                     </div>
                                 </div>
-                                <div class="font-medium menu-navigation-item is-active js-menu-link js-touchable" ng-click="goTo('home.explore','left');">
+                                <div class="font-medium menu-navigation-item js-menu-link js-touchable" ng-click="goTo('home.explore','left');" style="margin-top:40px;">
                                     <div class="menu-navigation-item_">
                                         <img src="img/encuentro.png" width="25" height="25">
                                       <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[206].text}}</div>

@@ -3131,25 +3131,33 @@ angular.module('starter.controllers', [])
 
 
 	var textarea = $('#chat-input-textarea');
-	var typingDelayMillis = 5000; // how long user can "think about his spelling" before we show "No one is typing -blank space." message
-
+	var typingDelayMillis = 800; // how long user can "think about his spelling" before we show "No one is typing -blank space." message
+	updateLastTypedTime();
 	function refreshTypingStatus() {
-	    if (!textarea.is(':focus') || textarea.val() == '' || new Date().getTime() - lastTypedTime.getTime() > typingDelayMillis) {
+	    if (textarea.val() == '') {
 			var message = user.id+','+currentUser.selectedUser.id+','+0;
 			A.RT.get({action: 'typing', query: message});
+			console.log('no typing');
 	    } else {
-			var message = user.id+','+currentUser.selectedUser.id+','+1;
-			A.RT.get({action: 'typing', query: message});
+	    	var t = new Date().getTime() - lastTypedTime.getTime();
+	    	t = parseInt(t);
+	    	if( t > typingDelayMillis){
+		    	updateLastTypedTime();
+		    	console.log('typing more');
+		    	var message = user_info.id+','+user+','+1;
+				$.get( gUrl, { action: 'typing', query: message } );
+			}	    	
+	    	console.log('waiting');
 	    }
 	}
 
 
-	setInterval(refreshTypingStatus, 1000);
-	textarea.keypress(updateLastTypedTime);
+	//setInterval(refreshTypingStatus, 1000);
+	textarea.keypress(refreshTypingStatus);
 	textarea.blur(refreshTypingStatus);
 
 	var typing = 'typing'+user.id+chatUser.id;
-	channel.unbind(typing, callback);
+	channel.unbind();
     channel.bind(typing, function(data) {
     	if(data.t == 1){
     		$scope.writing = true;  
@@ -3159,13 +3167,8 @@ angular.module('starter.controllers', [])
     });	
     	
 	var event = 'chat'+user.id+chatUser.id;
-	var callback = function(data) {
-	    // add comment into page
-	  };
-	channel.unbind(event, callback);
     channel.bind(event, function(data) {
 	  sendNewChat = $scope.nmessages.length + 1;
-   	
 	      $scope.nmessages.push({
 	        isMe: false,
 			seen:1,
@@ -3175,10 +3178,13 @@ angular.module('starter.controllers', [])
 	  	$scope.writing = false; 	      
 		if (window.cordova) {
 			$rootScope.playSound('inchat');
+		} else {
+			$('#chatSound')[0].play();
 		}
+
 	  viewScroll.scrollBottom(true);      
     });		
-    
+
     $scope.sendText = function(m) {
       sent = true;
 	  sendNewChat = $scope.nmessages.length + 1;
