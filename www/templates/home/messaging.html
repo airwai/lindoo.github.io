@@ -1,5 +1,4 @@
 <ion-view class="has-giphy" ng-class="{'show-gif': isGifShown}" style="background: #fff;" >
-
   <ion-nav-title style="border:none">
     <div class="navigation-bar" data-role="navigation-bar" style="border:none" data-qa="navbar">
         <div class="navigation-bar__primary" ng-click="goBack()">
@@ -9,9 +8,9 @@
         </div>
         <div class="navigation-bar__title"" data-qa="navbar-title" ng-click="showUserOptions()">
             <div class="navigation-bar__title_"><span class="chat-v2-name">{{name}}</span></div>
-            <div class="navigation-bar__title-additional" ng-if="status && !writing" style="color:#59c449">Online now</div>
-            <div class="navigation-bar__title-additional" ng-if="!status && !writing">Última conexión hace más de 30 días</div>
-            <div class="navigation-bar__title-additional" ng-show="writing">Is writing...</div>            
+            <div class="navigation-bar__title-additional" ng-if="status && !writing" style="color:#59c449">{{alang[36].text}}</div>
+            <div class="navigation-bar__title-additional" ng-if="!status && !writing">{{alang[216].text}} hace más de 30 días</div>
+            <div class="navigation-bar__title-additional" ng-show="writing">{{alang[209].text}}...</div>            
         </div>
         <div class="navigation-bar__secondary">
             <div class="chat-v2-switcher">
@@ -39,14 +38,14 @@
 
         <div class="floating-action stickers-promo" >
             <div class="cta-box cta-box--compact">
-                <div class="cta-box__header cta-box__header--xsm">Send gift to {{name}}</div>
+                <div class="cta-box__header cta-box__header--xsm">{{alang[210].text}} {{name}}</div>
                 <div class="cta-box__buttons">
                     <div class="button-wrapper">
                         <button class="button" style="background: #5d06b5;color:#fff" >
-                            <div class="button__content"><span class="button__text">Send</span></div></button>
+                            <div class="button__content"><span class="button__text">{{alang[110].text}}</span></div></button>
                     </div>
                 </div>
-                <div class="cta-box__additional">Cost: 250 créditos</div>
+                <div class="cta-box__additional">Cost: 250 credits</div>
             </div>
         </div>        
     </div>
@@ -58,15 +57,15 @@
 	                <div class="chat-blocker-info">
 	                    <div class="chat-blocker-info__image">
 	                        <div class="gift gift--sm">
-	                            <div class="gift__image"><img src="https://m.badoo.com/img/no-sprite/chat-initial-gift.png" alt=""></div>
+	                            <div class="gift__image"><img src="img/chat-initial-gift.png" alt=""></div>
 	                        </div>
 	                    </div>
-	                    <div class="chat-blocker-info__text">Espera a que te conteste o haz que se fije en ti con un regalo:</div>
+	                    <div class="chat-blocker-info__text">{{alang[211].text}}:</div>
 	                </div>
 	            </div>
 	            <div class="cta-box__buttons">
 	                <button class="button button--primary" ng-click="openGift()">
-	                    <div class="button__content"><span class="button__text">Enviar un regalo</span></div></button>
+	                    <div class="button__content"><span class="button__text">{{alang[161].text}}</span></div></button>
 	            </div>
 	        </div>
 	    </div>
@@ -117,7 +116,7 @@
         </div>                                        
 
     </div>
-    <div class="chat-send is-disabled" ng-click="sendText(message);message = '';" >Enviar</div>
+    <div class="chat-send is-disabled" ng-click="sendText(message);message = ' ';" >{{alang[110].text}}</div>
 </div>	
 
   <ion-content  delegate-handle="userMessageScroll"   on-swipe-right="goToChat()" style="background:#fff;padding-bottom:20px;border-top:2px solid #eee;">
@@ -131,7 +130,7 @@
                             <div class="brick__image" style="background-image: url({{photo}})"></div>
                         </div>
                     </div>
-                    <div class="ice-breaker__text">¡Rompe el hielo! Pregúntale a {{name}} qué le gusta.</div>
+                    <div class="ice-breaker__text">{{alang[212].text}} {{name}} {{alang[213].text}}.</div>
                 </div>
 
                 <div class="chat-v2__messages js-chat-messages">
@@ -154,21 +153,35 @@
                                 <img ng-src="{{item.body}}" style="width: 250px;border-radius: 5px;margin-right: 5px;" alt="" ng-click="openChatImageModal('{{item.body}}')" ng-if="item.type == 'image'">
                            </div>
                         </div>
-                        <div class="chat-message__status " ng-if="item.seen == 0">Entregado</div>
-                        <div class="chat-message__status " ng-if="item.seen == 1">Leido</div>
+                        <div class="chat-message__status " ng-if="item.seen == 0">{{alang[214].text}}</div>
+                        <div class="chat-message__status " ng-if="item.seen == 1">{{alang[215].text}}</div>
                     </div>
 
                    <div class="chat-message js-chat-message" ng-repeat="item in nmessages | orderBy : 'id' track by $index"
-						ng-class="item.isMe?'chat-message--out chat-message--blue':'chat-message--in chat-message--grey'">
+                        ng-class="item.isMe?'chat-message--out chat-message--blue':'chat-message--in chat-message--grey'">
                         <div class="chat-message__container">
                             <div class="chat-message__text">
                                 <div class="chat-message__text_" ng-if="item.type !== 'image'" ng-bind-html="item.body | nl2br"></div>
                                 <img ng-src="{{item.body}}" alt="" ng-click="openChatImageModal('{{item.body}}')" ng-if="item.type == 'image'">
                            </div>
                         </div>
-                        <div class="chat-message__status " ng-if="item.seen == 0">Entregado</div>
-                        <div class="chat-message__status " ng-if="item.seen == 1">Leido</div>
-                    </div>                    			        			        		        	
+                        <div class="chat-message__status " ng-if="item.seen == 0">{{alang[214].text}}</div>
+                        <div class="chat-message__status " ng-if="item.seen == 1">{{alang[215].text}}</div>
+                    </div> 
+
+                   <div class="chat-message js-chat-message chat-message--grey" ng-if="writing">
+                        <div class="chat-message__container" style="margin-top: 5px;">
+                            <div class="chat-message__text">
+                                <div class="chat-message__text_">
+                                    <div class="loader small grey ">
+                                        <div class="first dot"></div>
+                                        <div class="second dot"></div>
+                                        <div class="third dot"></div>
+                                    </div>                                    
+                                </div>
+                           </div>
+                        </div>
+                    </div>                                        			        			        		        	
 						                                                                              
                 </div>
                 <div class="chat-v2__spacing-stub js-chat-spacing-stub" style="height: 138px;"></div>
@@ -223,7 +236,7 @@
 			<h1>{{alang[46].text}} {{extrachat}} {{alang[47].text}}</h1>
 			<h4 ng-click="openCreditsModal()">{{alang[113].text}}</h4>
 			<center><span class="spotlight-me" ng-click="buyDailyChat()"  style="background:#275BDF;border:#025BDF">{{alang[114].text}}</span></center>
-			<br><h4>{{tlang[13].text}} <b>{{dailychatprice}}</b> {{tlang[17].text}}</h4>                    
+			<br><h4>{{alang[208].text}} <b>{{dailychatprice}}</b> {{alang[48].text}}</h4>                    
 		</div>
   </div>
  	<div class="only-premium" ng-if="maxDaily">
@@ -238,13 +251,13 @@
 			<h1>{{alang[112].text}}</h1>
 			<h4>{{alang[115].text}}</h4>
 			<center><span class="spotlight-me" ng-click="openPremiumModal()" style="background:#8A21EF;border:#2821EF">{{alang[114].text}}</span></center>
-			<br><h4>{{tlang[13].text}} <b>{{dailychatprice}}</b> {{tlang[17].text}}</h4> 		
+			<br><h4>{{alang[208].text}} <b>{{dailychatprice}}</b> {{alang[48].text}}</h4> 		
 			</h4>                    
 		</div>
 	</div>
     <div flow-init
          flow-name="uploader.flow"
          flow-files-added="processFiles($files)">
-      <button flow-btn type="file" id="uploadSendPhoto" style="display: none;">Upload Images</button>
+      <button flow-btn type="file" id="uploadSendPhoto" style="display: none;"></button>
      </div>    
 </ion-view>

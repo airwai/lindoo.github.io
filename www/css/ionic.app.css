@@ -4012,7 +4012,7 @@ a.subdued {
     left: 0;
     z-index: 0;
     overflow: hidden;
-    margin: 0 10px;
+    margin: 0 0px;
     min-width: 30px;
     height: 43px;
     text-align: center;
@@ -9625,15 +9625,15 @@ a.button {
 
 [nav-view-transition="ios"] [nav-view="entering"],
 [nav-view-transition="ios"] [nav-view="leaving"] {
-  -webkit-transition-duration: 500ms;
-  transition-duration: 500ms;
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
   -webkit-transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
   transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
-  -webkit-transition-property: opacity, -webkit-transform, box-shadow;
-  transition-property: opacity, transform, box-shadow; }
+  -webkit-transition-property: opacity, box-shadow;
+  transition-property: opacity, box-shadow; }
 
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
-  background-color: #000; }
+  background-color: #fff; }
 
 [nav-view-transition="ios"] [nav-view="active"],
 [nav-view-transition="ios"][nav-view-direction="forward"] [nav-view="entering"],
@@ -11216,3 +11216,6 @@ td-card {
 /* MATCH */
 
 /* end of MATCH */
+
+
+

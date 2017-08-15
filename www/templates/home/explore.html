@@ -2,14 +2,14 @@
   <ion-nav-title >
     <div class="navigation-bar"   >
         <div class="navigation-bar__primary">
-            <div class="navigation-bar__icon js-navigation"  ng-click="goTo('home.menu','right');" >
+            <div class="navigation-bar__icon js-navigation"  ng-click="goTo('home.menu','right',true);" >
               <i class="icon-svg ion-navicon-round" ></i>
               <span class="navigation-bar__menu-notification" ng-if="notificationMenu"></span>
             </div>
         </div>
         <div class="navigation-bar__title">
             <div class="navigation-bar__logo" style="z-index: 999;">
-              <img src="img/logo.png" />
+              <img src="{{logo}}" />
             </div>
         </div>
         <div class="navigation-bar__secondary"></div>
@@ -35,17 +35,20 @@
                     </div>
             </div>
             <div class="cta-box">
-                <div class="cta-box__header qa-title">I'ts a match!</div>
-                <div class="cta-box__content qa-message js-message"><b>{{cu3.first_name}}</b> and you like eachother...<br>Will you take the first step?</div>
+                <div class="cta-box__header qa-title">{{alang[142].text}}</div>
+                <div class="cta-box__content qa-message js-message">
+                    <b>{{alang[143].text}} {{cu3.first_name}}</b> {{alang[144].text}}<br>
+                    {{alang[160].text}}
+                </div>
             </div>
             <div class="promo-match__buttons">
                 <div class="promo-match__button">
-                    <div class="promo-match-button promo-match-button--sm">
+                    <div class="promo-match-button promo-match-button--sm" ng-click="goToChatGlobal('home.messaging','left',cards[0])" >
                         <div class="promo-match-button__icon"><i class="icon-svg promo-match-button__icon_">
                             <img src="img/goBack.png" style="width: 30px;">
                         </i>
                     </div>
-                        <div class="promo-match-button__label">Volver</div>
+                        <div class="promo-match-button__label">{{alang[146].text}}</div>
                     </div>
                 </div>
                 <div class="promo-match__button">
@@ -55,7 +58,7 @@
                                 <img src="img/goChat.png" style="width: 60px;">
                             </i>
                         </div>
-                        <div class="promo-match-button__label">Chatear ahora</div>
+                        <div class="promo-match-button__label">{{alang[145].text}}</div>
                     </div>
                 </div>
                 <div class="promo-match__button">
@@ -67,7 +70,7 @@
                                 </svg>
                             </i>
                         </div>
-                        <div class="promo-match-button__label">Send a gift</div>
+                        <div class="promo-match-button__label">{{alang[161].text}}</div>
                     </div>
                 </div>
             </div>
@@ -84,9 +87,11 @@
             <div class="encounters-disabled expand-filter" ng-if="!exploreResult" >
                 <div class="encounters-message">
                     <img src="img/icon-circle-criteriaBig.png" />
-                    <h1 class="comforta" style="font-size: 20px;color:#14171b">Expand your search</h1><span style="color:#14171b">Sorry, no one fits your preferences.<br>Search for people of other ages?</span>
+                    <h1 class="comforta" style="font-size: 20px;color:#14171b">{{alang[162].text}}</h1>
+                    <span style="color:#14171b">{{alang[163].text}}.<br>
+                    {{alang[164].text}}?</span>
                     <button class="button button--primary   js-touchable qa-button" ng-click="goTo('home.settings','left');">
-                        <div class="button__content"><span class="button__text comforta">Change your preferences</span></div>
+                        <div class="button__content"><span class="button__text comforta">{{alang[165].text}}</span></div>
                     </button>
                 </div>
             </div>
@@ -198,7 +203,7 @@
                                                     <div class="js-profile-info-section">
                                                         <div data-view-id="30">
                                                             <div class="profile-section">
-                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><img src="img/amex.png"></svg></i><b class="profile-section__title_">Current location</b></div>
+                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><img src="img/amex.png"></svg></i><b class="profile-section__title_">{{alang[166].text}}</b></div>
                                                                 <div class="profile-section__content is-decorated js-profile-section" ng-if="cards[0].full.city">
                                                                     <div>{{cards[0].full.city}}</div>
                                                                 </div>
@@ -213,8 +218,8 @@
                                                     <div class="js-profile-info-section" data-view-id="43">
                                                         <div data-view-id="42">
                                                             <div class="profile-section">
-                                                              <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><img src="img/amex.png"></img></i><b class="profile-section__title_">Gifts</b></div>
-<div class="profile-section__content is-decorated js-profile-section"><div class="profile-no-gifts js-send" data-id="18"><div class="profile-no-gifts__pic"><div class="gift gift--lg gift--send"><div class="gift__image"><img src="img/lips.png" alt=""></div><div class="gift__icon"><i class="icon-svg"><svg class="icon-svg_"> onloadedmetadata=""</svg></i></div></div></div><div class="profile-no-gifts__info">¡Send a gift and start to chat!</div></div></div>
+                                                              <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><img src="img/amex.png"></img></i><b class="profile-section__title_">{{alang[167].text}}</b></div>
+<div class="profile-section__content is-decorated js-profile-section"><div class="profile-no-gifts js-send" data-id="18"><div class="profile-no-gifts__pic"><div class="gift gift--lg gift--send"><div class="gift__image"><img src="img/lips.png" alt=""></div><div class="gift__icon"></div></div></div><div class="profile-no-gifts__info">¡{{alang[169].text}}!</div></div></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -224,11 +229,11 @@
                                                     <div class="js-profile-info-section" data-view-id="33">
                                                         <div data-view-id="32">
                                                             <div class="profile-section">
-                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-rating"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">Score</b></div>
+                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-rating"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">{{alang[168].text}}</b></div>
                                                                 <div class="profile-section__content is-decorated js-profile-section">
                                                                     <div class="profile-rating js-click-action">
                                                                         <div class="profile-rating__text">
-                                                                            <div class="js-hotness-rating-text"><b>{{cards[0].full.total_likers}}</b> out of <b>{{cards[0].full.totalLikes}}</b> people liked her!</div>
+                                                                            <div class="js-hotness-rating-text"><b>{{cards[0].full.total_likers}}</b> {{alang[171].text}} <b>{{cards[0].full.totalLikes}}</b> {{alang[172].text}}!</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -240,38 +245,38 @@
                                                     <div class="js-profile-info-section" data-view-id="37">
                                                         <div data-view-id="36">
                                                             <div class="profile-section">
-                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-about"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">About me</b></div>
+                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-about"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">{{alang[170].text}}</b></div>
                                                                 <div class="profile-section__content is-decorated js-profile-section">
 
                                                                     <table class="profile-about">
                                                                         <tbody>
                                                                             <tr><p ng-if="cards[0].bio">
                                                                                 {{cards[0].bio}}<br><br></p>
-                                                                                <td class="profile-about__name grey2">I'm here to</td>
-                                                                                <td class="profile-about__value">Make new friends</td>
+                                                                                <td class="profile-about__name grey2">{{alang[174].text}}</td>
+                                                                                <td class="profile-about__value">{{alang[175].text}}</td>
                                                                             </tr>
                                                                             <tr ng-if="cards[0].full.extended.field1">
-                                                                                <td class="profile-about__name grey2">Relationship</td>
+                                                                                <td class="profile-about__name grey2">{{alang[176].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field1}}</td>
                                                                             </tr>
                                                                             <tr ng-if="cards[0].full.extended.field2">
-                                                                                <td class="profile-about__name grey2">Sexual orientation</td>
+                                                                                <td class="profile-about__name grey2">{{alang[177].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field2}}</td>
                                                                             </tr>                                                                            
                                                                             <tr ng-if="cards[0].full.extended.field6">
-                                                                                <td class="profile-about__name grey2">Appearance</td>
+                                                                                <td class="profile-about__name grey2">{{alang[178].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field6}} {{cards[0].full.extended.field3}} {{cards[0].full.extended.field4}}</td>
                                                                             </tr>
                                                                             <tr ng-if="cards[0].full.extended.field7">
-                                                                                <td class="profile-about__name grey2">Living</td>
+                                                                                <td class="profile-about__name grey2">{{alang[179].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field7}}</td>
                                                                             </tr>
                                                                             <tr ng-if="cards[0].full.extended.field9">
-                                                                                <td class="profile-about__name grey2">Drink</td>
+                                                                                <td class="profile-about__name grey2">{{alang[180].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field9}}</td>
                                                                             </tr>
                                                                             <tr ng-if="cards[0].full.extended.field8">
-                                                                                <td class="profile-about__name grey2">Smoking</td>
+                                                                                <td class="profile-about__name grey2">{{alang[173].text}}</td>
                                                                                 <td class="profile-about__value">{{cards[0].full.extended.field8}}</td>
                                                                             </tr>
                                                                         </tbody>
@@ -285,7 +290,7 @@
                                                     <div class="js-profile-info-section" data-view-id="39">
                                                         <div data-view-id="38">
                                                             <div class="profile-section">
-                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-language"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">I speak</b></div>
+                                                                <div class="profile-section__title"><i class="icon-svg"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-profile-language"></use><img src="img/amex.png"></img></svg></i><b class="profile-section__title_">{{alang[181].text}}</b></div>
                                                                 <div class="profile-section__content is-decorated js-profile-section">
                                                                     <div>{{cards[0].full.language}}</div>
                                                                 </div>
@@ -298,7 +303,7 @@
                                                         <div data-view-id="40">
                                                             <div class="profile-section" 
                                                             ng-if="cards[0].full.extended.facebook_id > 0 || cards[0].full.extended.instagram_id || cards[0].full.extended.google_id || cards[0].full.extended.twitter_id">
-                                                                <div class="profile-section__title"><img src="img/amex.png"></img><b class="profile-section__title_">Profile verification</b></div>
+                                                                <div class="profile-section__title"><img src="img/amex.png"></img><b class="profile-section__title_">{{alang[182].text}}</b></div>
                                                                 <div class="profile-section__content is-decorated">
                                                                     <div class="js-profile-section">
                                                                         <div>
@@ -311,7 +316,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="verification-option__description">
-                                                                                            <div class="verification-option__message">Verified</div>
+                                                                                            <div class="verification-option__message">{{alang[183].text}}</div>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="verification-option" ng-if="cards[0].full.extended.instagram_id">
@@ -321,7 +326,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="verification-option__description">
-                                                                                            <div class="verification-option__message">Verified</div>
+                                                                                            <div class="verification-option__message">{{alang[183].text}}</div>
                                                                                         </div>
                                                                                     </div>  
                                                                                     <div class="verification-option" ng-if="cards[0].full.extended.twitter_id">
@@ -331,7 +336,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="verification-option__description">
-                                                                                            <div class="verification-option__message">Verified</div>
+                                                                                            <div class="verification-option__message">{{alang[183].text}}Verified</div>
                                                                                         </div>
                                                                                     </div>                                                                                                                                                                          
                                                                                     <div class="verification-option" ng-if="cards[0].full.extended.google_id">
@@ -341,7 +346,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="verification-option__description">
-                                                                                            <div class="verification-option__message">Verified</div>
+                                                                                            <div class="verification-option__message">{{alang[183].text}}Verified</div>
                                                                                         </div>
                                                                                     </div>
 
@@ -359,7 +364,7 @@
                                         <div class="additional-actions qa-additional-actions" ng-if="!loading">
                                             <div class="button-wrapper">
                                                 <button class="button button--secondary  js-block-button js-touchable qa-button" data-action="BLOCK-145">
-                                                    <div class="button__content"><span class="button__text" style="color: #fff">Block or Report</span></div></button>
+                                                    <div class="button__content"><span class="button__text" style="color: #fff">{{alang[184].text}}</span></div></button>
 
                                             </div>
                                         </div>
@@ -372,12 +377,12 @@
                             <div class="page-content">
                                 <div class="cta-box">
                                     <div class="cta-box__content js-error-img-section"><img src="https://m.badoo.com/img/no-sprite/raccoon.png" alt="" width="175" height="175"></div>
-                                    <div class="cta-box__header">Oops!</div>
-                                    <div class="cta-box__content">Something went wrong. We're doing everything to fix it and should be up and running soon!</div>
+                                    <div class="cta-box__header">{{alang[185].text}}!</div>
+                                    <div class="cta-box__content">{{alang[186].text}}!</div>
                                     <div class="cta-box__buttons">
                                         <div class="button-wrapper">
                                             <button class="button button--primary   js-touchable qa-button" data-action="REFRESH-135">
-                                                <div class="button__content"><span class="button__text">Refresh</span></div><span class="button__loader"><i class="icon-svg icon-svg--stretch"><svg class="icon-svg_ icon-svg__inactive"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#loader"></use></svg></i></span></button>
+                                                <div class="button__content"><span class="button__text">{{alang[187].text}}</span></div><span class="button__loader"><i class="icon-svg icon-svg--stretch"><svg class="icon-svg_ icon-svg__inactive"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#loader"></use></svg></i></span></button>
                                         </div>
                                     </div>
                                     <div class="cta-box__additional js-error-refresh-timer"></div>
@@ -394,4 +399,3 @@
 
 
 </ion-content>
-</ion-view>

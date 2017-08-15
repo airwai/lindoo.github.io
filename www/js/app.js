@@ -3,10 +3,13 @@ var max_ad;
 var adMob;
 var discoverChat = true;
 var mobileUser = '';
-var rt = new Pusher('3d9090b99da6ab76b79b', {
-  encrypted: true
+var rt = new Pusher('b0b15fcac140c816ccbe', {
+  encrypted: true,
+  cluster: "us2"
 });
+var lag = [];
 var channel = rt.subscribe('pds');
+var lastTypedTime = new Date(0);
 angular.module('starter', [
   'ionic',
   'awlert',
@@ -21,10 +24,14 @@ angular.module('starter', [
   'ion-google-autocomplete',
   'ngCordova',
   'ngAnimate',              // inject the ngAnimate module
-  'ngFx'
+  'ngFx',
+  'ui.router'  
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope, $location, $state, $stateParams) {
+  $rootScope.$location = $location;
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;  
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
   		cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -51,9 +58,9 @@ angular.module('starter', [
 
 
 .config(function($ionicConfigProvider) {
-  $ionicConfigProvider.views.transition('platform');
+  $ionicConfigProvider.views.transition('ios');
   $ionicConfigProvider.navBar.alignTitle('center');
-  $ionicConfigProvider.views.swipeBackEnabled(false);
+  $ionicConfigProvider.views.swipeBackEnabled(true);
   $ionicConfigProvider.views.maxCache(0);
   $ionicConfigProvider.tabs.position('bottom');
 })
@@ -90,20 +97,6 @@ angular.module('starter', [
       controller: 'WelcomeCtrl'
     })
 
-    .state('home.popularity', {
-      url: '/popularity',
-      templateUrl: 'templates/home/popularity.html',
-      controller: 'popularityCtrl'
-    })
-
-    
-
-
-    .state('home.login', {
-      url: '/login',
-      templateUrl: 'templates/home/login.html',
-      controller: 'LoginCtrl'
-    })
 
     .state('home.register', {
       url: '/register',

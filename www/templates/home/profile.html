@@ -1,18 +1,22 @@
 <ion-view title="">
   <ion-nav-title>
-    <div class="navigation-bar"   >
-      <div class="navigation-bar__primary">
-        <div class="navigation-bar__icon js-navigation" ng-click="goBack()">
-          <i class="icon-svg ion-arrow-left-c"></i>
+    <div class="navigation-bar">
+        <div class="navigation-bar__primary" ng-click="goTo('home.menu','right');">
+            <div class="navigation-bar__icon js-navigation" >
+              <i class="icon-svg ion-navicon-round" ></i>
+              <span class="navigation-bar__menu-notification" ng-if="notificationMenu"></span>
+            </div>
         </div>
-      </div>
-      <div class="navigation-bar__title">
-        <div class="navigation-bar__logo" style="z-index: 999;">
-          <img src="img/logo.png" />
+      <div class="navigation-bar__title comforta" data-qa="navbar-title"><span class="js-title">Profile</span></div>
+        <div class="navigation-bar__secondary">
+          
+            <div class="navigation-bar__icon js-navigation" ng-click="logout()" style="margin-right: 15px;">
+              <i class="icon-svg ion-android-exit" ></i>
+            </div>          
         </div>
-      </div>
-    </div>
-  </ion-nav-title>
+    </div> 
+  
+</ion-nav-title>
 
   <ion-content  delegate-handle="modalContent" scroll="true">
     <div class="page own-profile visible" style="z-index: 600;" data-vrt-ready="true">
@@ -33,7 +37,7 @@
                                 <div class="photo-grid__item" ng-click="uploadPhoto()">
                                   <div class="photo-grid__tile photo-grid__tile--add-photos js-add-photos">
                                     <div class="photo-grid__tile-content"><img src="img/add-photo.png">
-                                      <div class="photo-grid__tile-label">Add photos</div>
+                                      <div class="photo-grid__tile-label">{{alang[217].text}}</div>
                                     </div>
                                   </div>
                                 </div>
@@ -62,21 +66,21 @@
                           <div class="paid-feature js-payment-overlay qa-paid-feature-status qa-spp" ng-click="openPremiumModal()">
                             <div class="paid-feature__icon"><img src="img/icon-spp.png" width="30"></div>
                             <div class="paid-feature__info">
-                              <div class="paid-feature__label qa-paid-feature-status-title">Superpowers</div>
+                              <div class="paid-feature__label qa-paid-feature-status-title">{{alang[200].text}}</div>
                               <div class="paid-feature__value  qa-payment-feature-value">{{premium}}</div>
                             </div>
                           </div>
                           <div class="paid-feature js-payment-overlay qa-paid-feature-status qa-popularity" data-feature="103">
                             <div class="paid-feature__icon"><img src="img/icon-battery-very-low.png" width="30"></div>
                             <div class="paid-feature__info">
-                              <div class="paid-feature__label qa-paid-feature-status-title">Popularity</div>
-                              <div class="paid-feature__value paid-feature__value--very-low qa-payment-feature-value">Very low</div>
+                              <div class="paid-feature__label qa-paid-feature-status-title">{{alang[201].text}}</div>
+                              <div class="paid-feature__value paid-feature__value--very-low qa-payment-feature-value">{{alang[218].text}}</div>
                             </div>
                           </div>
                           <div class="paid-feature js-payment-overlay qa-paid-feature-status qa-credits" ng-click="openCreditsModal()">
                             <div class="paid-feature__icon"><img src="img/icon-coins.png" width="30"></div>
                             <div class="paid-feature__info">
-                              <div class="paid-feature__label qa-paid-feature-status-title">Credits</div>
+                              <div class="paid-feature__label qa-paid-feature-status-title">{{alang[48].text}}</div>
                               <div class="paid-feature__value qa-payment-feature-value">{{credits}}</div>
                             </div>
                           </div>
@@ -91,17 +95,17 @@
     <div class="list m-n">
 
       <div class="item comforta" >
-      <span >Nombre</span>
+      <span >{{alang[158].text}}</span>
     <input style="font-size:16px;display:inline-table;border:none;background:none;float:right;text-align:right;" class="comforta" id="userName" value="{{name}}"/>
       </div>
     
       <div class="item comforta" >
-      <span>Edad</span>
+      <span>{{alang[219].text}}</span>
     <input style="margin:0;padding:0;font-size:16px;display:inline-table;border:none;background:none;float:right;text-align:right;"  id="userAge" value="{{age}}"/>
       </div>
 
       <div class="item item-toggle comforta" ng-click="updateUserGender()">
-      <span data-tid="112">Gender</span>
+      <span data-tid="112">{{alang[90].text}}</span>
     <label class="toggle comforta" style="font-size:16px;top:14px;">
       <span>{{gender}}</span>
     </label>
@@ -207,7 +211,7 @@
         <option value="227 lbs (103kg)">227 lbs (103kg)</option>
         <option value="229 lbs (104kg)">229 lbs (104kg)</option>
         <option value="231 lbs (105kg)">231 lbs (105kg)</option>
-        <option value="233 lbs (106g)">233 lbs (106kg)</option>
+        <option value="233 lbs (106kg)">233 lbs (106kg)</option>
         <option value="236 lbs (107kg)">236 lbs (107kg)</option>
         <option value="238 lbs (108kg)">238 lbs (108kg)</option>
         <option value="240 lbs (109kg)">240 lbs (109kg)</option>
@@ -291,7 +295,7 @@
   
     <div class="list m-n">
       <div class="item item-divider b-none"></div>
-      <div class="item item-divider b-none comforta" data-tid="100">Bio</div>
+      <div class="item item-divider b-none comforta" data-tid="100">{{alang[220].text}}</div>
       <div class="item comforta">
         <textarea id="userBio" style="width:100%;font-size:16px;" class="comforta">{{bio}}</textarea>
       </div>
@@ -304,6 +308,6 @@
     <div flow-init
          flow-name="uploader.flow"
          flow-files-added="processFiles($files)">
-      <button flow-btn type="file" id="uploadRegPhoto" style="display: none;">Upload Images</button>
+      <button flow-btn type="file" id="uploadRegPhoto" style="display: none;">{{alang[221].text}}</button>
      </div>        
       </ion-content>

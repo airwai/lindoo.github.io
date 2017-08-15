@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
-  .controller('AppCtrl', function($scope,$rootScope,$ionicHistory,$window,$ionicViewSwitcher,$ionicSideMenuDelegate,$ionicPlatform, $cordovaNativeAudio,$ionicModal,$ionicPopup,A,$localstorage,Navigation,$ionicPlatform,$ionicSlideBoxDelegate,$ionicScrollDelegate,$timeout,currentUser,$interval,$ionicActionSheet,$state,$sce,$cordovaCamera,$ionicLoading) {		
+  .controller('AppCtrl', function($scope,$state,$rootScope,$ionicHistory,$window,$ionicViewSwitcher,$ionicSideMenuDelegate,$ionicPlatform, $cordovaNativeAudio,$ionicModal,$ionicPopup,A,$localstorage,Navigation,$ionicPlatform,$ionicSlideBoxDelegate,$ionicScrollDelegate,$timeout,currentUser,$interval,$ionicActionSheet,$state,$sce,$cordovaCamera,$ionicLoading) {		
 	
 	$rootScope.logged = false;
-
+	$rootScope.hideNav = false;
 	$rootScope.trustPhoto = function(url){
 		return $sce.trustAsResourceUrl(url);		
 	}		
@@ -13,11 +13,25 @@ angular.module('starter.controllers', [])
 
 	$rootScope.goToChatGlobal = function(url,slide,val) {
 		currentUser.selectedUser=val;
-		Navigation.goNative(url,slide,val);  
+		if(window.cordova){
+			Navigation.goNative(url,slide,val); 
+		} else {
+			$state.go(url, val); 		
+		} 
 	};
 
 	$rootScope.goTo = function(url,slide) {
-		Navigation.goNative(url,slide);  
+
+		/*
+		if (url.indexOf('home.menu') !== -1) {
+		  $rootScope.hideNav = true; 
+		} */
+		
+		if(window.cordova){
+			Navigation.goNative(url,slide,val); 
+		} else {			
+			$state.go(url); 		
+		}  
 	};	
 
 	$rootScope.goBack = function(){
@@ -583,7 +597,12 @@ angular.module('starter.controllers', [])
 					cards.unshift(current_user);
 					$rootScope.cards = cards;
 					$rootScope.aImages = cards[0].full.galleria; 
-					Navigation.goNative('home.explore','left');
+					if(window.cordova){
+						Navigation.goNative('home.explore','left'); 
+					} else {
+						$state.go('home.explore'); 		
+					} 					
+					
 			  },
 			  function(){}
 			  )		 
@@ -603,8 +622,13 @@ angular.module('starter.controllers', [])
   })
 
 	.controller('menuCtrl',function($scope,$rootScope,$state,$ionicViewSwitcher, $cordovaDevice,A,$localstorage,$ionicLoading) {
-		$ionicViewSwitcher.nextDirection("back");
+		if(window.cordova){
+			$ionicViewSwitcher.nextDirection("back");
+		} else {
+			$ionicViewSwitcher.nextDirection("back");
+		}
 		url = 'menu';
+		$('.navigation-bar').hide();
 		user = $localstorage.getObject('user');
 		config = $localstorage.getObject('config');	 
 		lang = $localstorage.getObject('lang');
@@ -619,6 +643,18 @@ angular.module('starter.controllers', [])
 		} else {
 			$scope.premium	= 'No'
 		}
+
+		$scope.alang = [];
+		alang.forEach(function(entry) {					  
+		  $scope.alang.push({
+			id: entry,
+			text: entry.text
+		  });
+		});	
+
+		app = $localstorage.getObject('app');
+		$scope.logo = app.logo;
+		$rootScope.spotlight = [];
 		//SPOTLIGHT
 		var spot = function () {
 			try {		  
@@ -626,7 +662,7 @@ angular.module('starter.controllers', [])
 			  $scope.ajaxRequest5.$promise.then(function(){											
 					spotlight = $scope.ajaxRequest5.spotlight;
 					console.log(spotlight);
-					$rootScope.spotlight = [];
+					
 					$rootScope.spotlight = spotlight;
 					
 			  },
@@ -680,8 +716,15 @@ angular.module('starter.controllers', [])
 	})
   
 
-  .controller('WelcomeCtrl', function($scope, $state,$http,awlert, $ionicLoading,$ionicActionSheet, $timeout,A,$cordovaOauth,$localstorage,Navigation) {
-	config = $localstorage.getObject('config');									  
+  .controller('WelcomeCtrl', function($scope, $state,$ionicViewSwitcher,$http,awlert, $ionicLoading,$ionicActionSheet, $timeout,A,$cordovaOauth,$localstorage,Navigation) {
+	config = $localstorage.getObject('config');
+
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+
 	lang = $localstorage.getObject('lang');
 	alang = $localstorage.getObject('alang');
 	$('#ready').removeClass('hidden');	
@@ -691,7 +734,16 @@ angular.module('starter.controllers', [])
 	  $(this).text(alang[id].text);
 	});
 
+	$scope.alang = [];
+	alang.forEach(function(entry) {					  
+	  $scope.alang.push({
+		id: entry,
+		text: entry.text
+	  });
+	});	
 
+	app = $localstorage.getObject('app');
+	$scope.logo = app.logo;
 
 	var val = 0;
 	$scope.forgetBtn = false;
@@ -733,7 +785,12 @@ angular.module('starter.controllers', [])
 				$localstorage.setObject('user', $scope.ajaxRequest.user);
 				usPhotos = $scope.ajaxRequest.user.photos;
 				sape = $scope.ajaxRequest.user.slike;
-				Navigation.goNative('home.explore','right','');	
+				if(window.cordova){
+					Navigation.goNative('home.explore','right','');	
+				} else {
+					$state.go('home.explore'); 		
+				} 				
+				
 				$localstorage.set('mobileUser',$scope.ajaxRequest.user.app_id);
 			}
 		},
@@ -792,7 +849,12 @@ angular.module('starter.controllers', [])
 		$scope.ajaxRequest.$promise.then(function(){							
 			$localstorage.setObject('user', $scope.ajaxRequest.user);
 			usPhotos = $scope.ajaxRequest.user.photos;
-			Navigation.goNative('home.explore','right',''); 
+			if(window.cordova){
+				Navigation.goNative('home.explore','right','');igation.goNative(url,slide,val); 
+			} else {
+				$state.go(url, val); 		
+			} 			
+			 
 		},
 		function(){
 			awlert.neutral('Something went wrong. Please try again later',3000);
@@ -825,6 +887,12 @@ angular.module('starter.controllers', [])
 	prices = $localstorage.getObject('prices');
 	$rootScope.logged = true;
 	$rootScope.me = user;
+
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
 
 	alang.forEach(function(entry) {					  
 	  $scope.alang.push({
@@ -863,9 +931,7 @@ angular.module('starter.controllers', [])
 	  $(this).text(lang[id].text);
 	});
 	
-	$scope.changePage = function(url,slide,val) {
-		Navigation.goNative(url, val, slide);  
-	};	
+	
 	var result = [];
 	var loadMore = [];
 	$scope.imageLocations = [];
@@ -990,6 +1056,7 @@ angular.module('starter.controllers', [])
 			addToSpotlight();
 		}
 	}
+
 	//ADMOB
 	if(show_ad == max_ad && user.premium == 0){
 		if(window.AdMob) window.AdMob.prepareInterstitial( {adId:adMobI, autoShow:true} );
@@ -997,22 +1064,7 @@ angular.module('starter.controllers', [])
 	}
 	show_ad++;	
 
-
-	var addToSpotlight = function () {
-		try {	
-		  $scope.ajaxRequest2 = A.Query.get({action: 'addToSpotlight', query: user.id});
-		  $scope.ajaxRequest2.$promise.then(function(){	
-			spot();
-		  },
-		  function(){}
-		  )		 
-		}
-		catch (err) {
-			console.log("Error " + err);
-		}	
-	} 
-	
-
+ 
   $scope.loadMore = function() {
 	  loadMore();
   };
@@ -1025,6 +1077,12 @@ angular.module('starter.controllers', [])
 	var app = $localstorage.getObject('app');
 	var val = 0;
 	$('#ready').removeClass('hidden');	
+
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
 
 	lang = $localstorage.getObject('lang');
 	alang = $localstorage.getObject('alang');
@@ -1058,6 +1116,11 @@ angular.module('starter.controllers', [])
 	var reg = '';								   
 	var app = $localstorage.getObject('app'); 
 	var w;
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}	
 	lang = $localstorage.getObject('lang');
 	alang = $localstorage.getObject('alang');
 	$('#ready').removeClass('hidden');	
@@ -1069,6 +1132,17 @@ angular.module('starter.controllers', [])
 	  var id = $(this).attr('data-lid');
 	  $(this).text(lang[id].text);
 	});
+
+	$scope.alang = [];
+	alang.forEach(function(entry) {					  
+	  $scope.alang.push({
+		id: entry,
+		text: entry.text
+	  });
+	});	
+
+	app = $localstorage.getObject('app');
+	$scope.logo = app.logo;
 
 	$scope.lname = lang[26].text;
 	$scope.lemail = lang[28].text;
@@ -1364,7 +1438,13 @@ angular.module('starter.controllers', [])
 	$rootScope.logged = true;
 	$rootScope.me = user;
 	$scope.newChat = false;
-	$ionicViewSwitcher.nextDirection("forward");
+
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}	
+	
 	$scope.trustSrc = function(src) {
 		return $sce.trustAsResourceUrl(src);
 	}  
@@ -1434,9 +1514,6 @@ angular.module('starter.controllers', [])
 	$scope.superLike = 5;
 	$scope.uphoto = user.profile_photo;
 
-	$scope.changePage = function(url,slide,val) {
-		Navigation.goNative(url, val, slide);  
-	};
 
 	$scope.goToChat = function(){
 		$ionicViewSwitcher.nextDirection('back'); // 'forward', 'back', etc.
@@ -1652,7 +1729,12 @@ angular.module('starter.controllers', [])
 
   .controller('profileCtrl', function($state,$rootScope,$ionicActionSheet,$ionicViewSwitcher,$scope,A, $ionicModal,$localstorage,Navigation) {
 	url = 'profile-me';
-
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+	
 	user = $localstorage.getObject('user');
 	config = $localstorage.getObject('config');	 
 	lang = $localstorage.getObject('lang');
@@ -1668,6 +1750,16 @@ angular.module('starter.controllers', [])
 	$rootScope.logged = true;
 	$rootScope.me = user;
 
+	$scope.alang = [];
+	alang.forEach(function(entry) {					  
+	  $scope.alang.push({
+		id: entry,
+		text: entry.text
+	  });
+	});	
+
+	app = $localstorage.getObject('app');
+	$scope.logo = app.logo;
 
 		$scope.loading = false;
 		$scope.bio = user.bio;
@@ -2175,6 +2267,12 @@ angular.module('starter.controllers', [])
 	$rootScope.me = user;
 	$scope.newChat = false;
 
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+
 	$scope.lang = [];
 	if(user.notification.fan == 1){
 		$scope.likes = true;
@@ -2240,16 +2338,11 @@ angular.module('starter.controllers', [])
 	}	
 	alang.forEach(function(entry) {					  
 	  $scope.alang.push({
-		id: entry,
+		id: entry.id,
 		text: entry.text
 	  });
 	});
-	lang.forEach(function(entry) {					  
-	  $scope.lang.push({
-		id: entry,
-		text: entry.text
-	  });
-	});
+
 	$scope.city = user.city;
 	$scope.country = user.country;
 	$scope.s_age = user.sage;
@@ -2374,6 +2467,12 @@ angular.module('starter.controllers', [])
 	url = 'visitors';
 	lang = $localstorage.getObject('lang');
 
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+
 	alang = $localstorage.getObject('alang');
 	site_prices = $localstorage.getObject('prices');
 	$scope.spotlightprice = site_prices.spotlight;
@@ -2456,6 +2555,12 @@ angular.module('starter.controllers', [])
 	$scope.cienmeprice = site_prices.discover;
 	$scope.alang = [];
 
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+
 	alang.forEach(function(entry) {					  
 	  $scope.alang.push({
 		id: entry,
@@ -2481,6 +2586,7 @@ angular.module('starter.controllers', [])
 			$state.go(url, val); 
 		}
 	};	
+	$scope.show = 1;
    	$scope.onTabShow = function(val,title){
 		$scope.show = val;	
 		$scope.title = title;		
@@ -2581,10 +2687,19 @@ angular.module('starter.controllers', [])
 	  });
 	});
 	var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');	
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
 
 	$scope.changePage = function(url,slide,val) {
 		currentUser.selectedUser=val;
-		Navigation.goNative(url,slide,val); 
+		if(window.cordova){
+			Navigation.goNative(url,slide,val); 
+		} else {
+			$state.go(url, val); 		
+		} 		 
 	};	
     $scope.show = 1;
 	$scope.loadM = parseInt(10);
@@ -2718,6 +2833,12 @@ angular.module('starter.controllers', [])
 		currentUser.selectedUser = user;	
 	}
 	
+	if(window.cordova){
+		$ionicViewSwitcher.nextDirection("forward");
+	} else {
+		$ionicViewSwitcher.nextDirection("back");
+	}
+	
 	url = 'inchat';
 	if (window.cordova) {
 		$scope.app = true;
@@ -2727,7 +2848,7 @@ angular.module('starter.controllers', [])
 	site_prices = $localstorage.getObject('prices');
 	$scope.dailychatprice = site_prices.chat;
 	$scope.alang = [];
-	$scope.checkFocus = false;
+	$scope.focusInput = false;
 	$scope.wait = false;
 	//ADMOB
 	if(show_ad == max_ad){
@@ -2933,7 +3054,7 @@ angular.module('starter.controllers', [])
 			 $scope.chatLimit = true;
 		  }
 			if ($scope.messages === undefined || $scope.messages.length == 0) {
-			  $scope.checkFocus = true;
+			  $scope.focusInput = true;
 			  $scope.loader =false;	
 			  return false;
 			}
@@ -2959,7 +3080,7 @@ angular.module('starter.controllers', [])
 			if ($scope.messages === undefined || $scope.messages.length == 0 && $scope.nmessages === undefined || $scope.nmessages.length == 0) {
 				 A.Query.get({action: 'today', query: user.id});
 			}
-		  $scope.ajaxRequest = A.RT.get({action: 'message', query: message});	
+		  
 		  $scope.ajaxRequest2 = A.Query.get({action: 'sendMessage', query: message});
 		  $scope.ajaxRequest2.$promise.then(function(){	
 			
@@ -3001,29 +3122,31 @@ angular.module('starter.controllers', [])
 	var tt = true;
 	var sent = false;
 
+	function updateLastTypedTime() {
+	    lastTypedTime = new Date();
+	}	
 	
-	$scope.typing = function(m){
-		if(tt == true){
-			tt = false;
-			setTimeout(function(){
-				if(sent == false){
-					if(m.length > 2){ 
-						var message = user.id+','+currentUser.selectedUser.id+','+1;
-						A.RT.get({action: 'typing', query: message});
-					} else {
-						var message = user.id+','+currentUser.selectedUser.id+','+0;
-						A.RT.get({action: 'typing', query: message});
-					}
-				} else {
-					var message = user.id+','+currentUser.selectedUser.id+','+0;
-					A.RT.get({action: 'typing', query: message});					
-				}
-				tt = true;
-			}, 550 );
-		}
-	}
 
 	$scope.writing = false;
+
+
+	var textarea = $('#chat-input-textarea');
+	var typingDelayMillis = 5000; // how long user can "think about his spelling" before we show "No one is typing -blank space." message
+
+	function refreshTypingStatus() {
+	    if (!textarea.is(':focus') || textarea.val() == '' || new Date().getTime() - lastTypedTime.getTime() > typingDelayMillis) {
+			var message = user.id+','+currentUser.selectedUser.id+','+0;
+			A.RT.get({action: 'typing', query: message});
+	    } else {
+			var message = user.id+','+currentUser.selectedUser.id+','+1;
+			A.RT.get({action: 'typing', query: message});
+	    }
+	}
+
+
+	setInterval(refreshTypingStatus, 1000);
+	textarea.keypress(updateLastTypedTime);
+	textarea.blur(refreshTypingStatus);
 
 	var typing = 'typing'+user.id+chatUser.id;
 	channel.unbind(typing, callback);
@@ -3055,7 +3178,7 @@ angular.module('starter.controllers', [])
 		}
 	  viewScroll.scrollBottom(true);      
     });		
-    $scope.focusInput = true;
+    
     $scope.sendText = function(m) {
       sent = true;
 	  sendNewChat = $scope.nmessages.length + 1;
@@ -3065,9 +3188,9 @@ angular.module('starter.controllers', [])
         type: 'text',
         body: m
       });
-      $scope.focusInput = true;
+      var send = user.id+','+currentUser.selectedUser.id+','+user.profile_photo+','+user.first_name+','+m+',text';      
 	  var message = user.id+','+currentUser.selectedUser.id+','+m+',text';
-
+	  A.RT.get({action: 'message', query: send});	
 	  viewScroll.scrollBottom(true);
 	  sendMessage(message);
     }
@@ -3087,9 +3210,8 @@ angular.module('starter.controllers', [])
       }
     }
 
-	
     $scope.sendGif = function(imageUrl) {
-      $scope.messages.push({
+      $scope.nmessages.push({
         isMe: true,
         type: 'image',
         body: imageUrl
@@ -3103,7 +3225,7 @@ angular.module('starter.controllers', [])
 	
     $scope.sendGiftBtn = function(imageUrl,price) {
 	  var m = '<img src="'+imageUrl+'"/>';
-      $scope.messages.push({
+      $scope.nmessages.push({
         isMe: true,
         type: 'text',
         body: '<img src="'+imageUrl+'"/>'

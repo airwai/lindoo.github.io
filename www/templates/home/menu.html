@@ -1,14 +1,12 @@
-    <ion-view hide-nav-bar="true">
-    <ion-content style="background:#fff" scroll="true" >
+    <ion-content style="background:#fff;top: 0;z-index: 9" class="slide-top"  >
 
-        <div ng-if="logged">
-                <div class="page overlay-page menu visible"  style="width:{{menuWidth}}px;overflow-y: hidden">
+                <div class="page overlay-page menu visible "  style="width:{{menuWidth}}px;overflow-y: hidden">
                     <div id="menu"  style="background: #fff" >
                         <div class="menu-fade-section" scroll="true" style="height:{{menuHeight}}px;overflow-y: scroll;" >
                             <div class="vertical three">
                                 <div class="menu-payments font-regular font-small">
                                     <div class="menu-payment js-payment-overlay qa-paid-feature-status qa-spp" ng-click="openPremiumModal()">
-                                        <div class="menu-payment__name qa-paid-feature-status-title">Super Powers</div>
+                                        <div class="menu-payment__name qa-paid-feature-status-title">{{alang[200].text}}</div>
                                         <div class="font-medium menu-payment__value qa-payment-feature-value">{{premium}}</div>
                                         <i class="icon-svg icon-svg--lg menu-payment__icon">
                                             <svg class="icon-svg_">
@@ -17,16 +15,16 @@
                                         </i>
                                     </div>
                                     <div class="menu-payment js-payment-overlay qa-paid-feature-status qa-popularity">
-                                        <div class="menu-payment__name qa-paid-feature-status-title">Popularity</div>
-                                        <div class="red-level font-medium menu-payment__value qa-payment-feature-value">Low</div>
+                                        <div class="menu-payment__name qa-paid-feature-status-title">{{alang[201].text}}</div>
+                                        <div class="red-level font-medium menu-payment__value qa-payment-feature-value">{{alang[202].text}}</div>
                                         <i class="icon-svg icon-svg--lg menu-payment__icon">
                                             <svg class="icon-svg_">
-                                                <img src="img/popularity0.png"style="margin-left:15px;width: 23px;  margin-top: 10px"/>
+                                                <img src="img/popularity0.png" style="margin-left:15px;width: 23px;  margin-top: 10px"/>
                                             </svg>
                                         </i>
                                     </div>
                                     <div class="menu-payment js-payment-overlay qa-paid-feature-status qa-credits" ng-click="openCreditsModal()">
-                                        <div class="menu-payment__name qa-paid-feature-status-title">Credits</div>
+                                        <div class="menu-payment__name qa-paid-feature-status-title">{{alang[203].text}}</div>
                                         <div class="white-level font-medium menu-payment__value qa-payment-feature-value">{{me.credits}}</div>
                                         <i class="icon-svg icon-svg--lg menu-payment__icon">
                                             <svg class="icon-svg_">
@@ -40,7 +38,7 @@
 
                             <div id="spotlight" >
                                 <div class="spotlight-heading">
-                                    <div class="spotlight-heading__title">Add me here!</div>Get seen by millions!</div>
+                                    <div class="spotlight-heading__title">{{alang[204].text}}!</div>{{alang[205].text}}!</div>
                                 <div class="spotlight-users">
                                     <div class="spotlight-users__item spotlight-users__item--add js-spotlight-add-action js-spotlight-add-after-this">
                                         <div class="brick">
@@ -83,39 +81,43 @@
                                 <div class="font-medium menu-navigation-item is-active js-menu-link js-touchable" ng-click="goTo('home.explore','left');">
                                     <div class="menu-navigation-item_">
                                         <img src="img/encuentro.png" width="25" height="25">
-                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">Encounters</div>
+                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[206].text}}</div>
                                     </div>
                                 </div>
                                 <div class="font-medium menu-navigation-item js-menu-link js-touchable" ng-click="goTo('home.meet','left');">
                                     <div class="menu-navigation-item_">
                                       <img src="img/meet.png" width="25" height="25">
-                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">People Nearby</div>
+                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[207].text}}</div>
                                     </div>
                                 </div>
+
+                                <!--
                                 <div class="font-medium menu-navigation-item js-menu-link js-touchable" >
                                     <div class="menu-navigation-item_">
                                       <img src="img/populars.png" width="25" height="25">
                                       <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">Most populars</div>
                                     </div>
                                 </div>
+
+                                -->
                                 <div class="font-medium menu-navigation-item js-menu-link js-touchable" ng-click="goTo('home.matches','left');">
                                     <div class="menu-navigation-item_">
                                       <img src="img/messages.png" width="25" height="25">
-                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">Messages</div>
+                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[96].text}}</div>
                                     </div>
                                 </div>
 
                                 <div class="font-medium menu-navigation-item js-menu-link js-touchable" ng-click="goTo('home.match','left');">
                                     <div class="menu-navigation-item_">
                                       <img src="img/liked.png" width="25" height="25">
-                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">Liked you</div>
+                                      <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[39].text}}</div>
                                         <mark class="mark mark--sm menu-navigation-item__counter"><span class="mark__text"></span></mark>
                                     </div>
                                 </div>
                                 <div class="font-medium menu-navigation-item js-menu-link js-touchable" ng-click="goTo('home.visitors','left');">
                                     <div class="menu-navigation-item_">
                                       <img src="img/visitors.png" width="25" height="25">
-                                        <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">Visitors</div>
+                                        <div class="menu-navigation-item__name" style="color: #fff ; margin-top: 3px">{{alang[10].text}}</div>
                                         <mark class="mark mark--sm menu-navigation-item__counter"><span class="mark__text"></span></mark>
                                     </div>
                                 </div>
@@ -123,40 +125,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-            <!--
-            <div class="page overlay-page stickers visible" ng-if="showStickers" style="z-index: 600;background: rgba(255,255,255,.7)">
-                    <div class="tabs tabs--scrollable stickers-tabs js-tabs" style="height: 60px;">
-                        <div class="tab  js-sticker-tab">
-                            <div class="tab__other">
-                                <div class="stickers-tabs__image" style="background-image: url(&quot;img/main.png&quot;);"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stickers-body" scroll="true">
-                        <div class="stickers-showcase">
-                            <div class="stickers-showcase__item js-sticker" data-id="44">
-                                <div class="stickers-showcase__item_"><i class="icon-svg stickers-showcase__loader"><svg class="icon-svg_"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#loader"></use><image src="/img/gifs/small-squares-grey.gif"></image></svg></i>
-                                    <div class="stickers-showcase__image js-preload" data-src="img/2.png" style="background-image: url(&quot;//badoocdn.com/big/assets/stickers_mobile/fox/thumb/standard/sz___size__/2.png&quot;);"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="floating-action stickers-promo" ng-if="showStickers">
-                        <div class="cta-box cta-box--compact">
-                            <div class="cta-box__header cta-box__header--xsm">Bola de nieve</div>
-                            <div class="cta-box__buttons">
-                                <div class="button-wrapper">
-                                    <button class="button button--billing-green" >
-                                        <div class="button__content"><span class="button__text">Desbloquear</span></div></button>
-                                </div>
-                            </div>
-                            <div class="cta-box__additional">Coste: 250 créditos</div>
-                        </div>
-                    </div>
-                </div> -->            
+          
             </ion-content>
             </ion-view>

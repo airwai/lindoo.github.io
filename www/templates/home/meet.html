@@ -26,7 +26,7 @@
  
 
                         <div class="users-folder__item qa-profile-item" ng-repeat="p in meet track by $index">
-                            <div class="brick-wrapper js-user-avatar fadeInUp">
+                            <div class="brick-wrapper js-user-avatar fadeInUp" ng-click="openProfileModal({{p.id}},'{{p.name}}','{{p.photo}}',{{p.age}},'{{p.city}}')">
                                 <div class="brick brick--lg">
                                     <div class="brick__image meetUser meetUser-{{p.show}}">
                                     <img class="js-user-image" src="{{p.photo}}" alt=""></div>
@@ -56,11 +56,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cta-box__content">Pon tu perfil en el primer puesto de los resultados de búsqueda y haz que te vean más <b>chicas</b> en <b>Montevideo</b>.</div>
+                        <div class="cta-box__content">{{alang[198].text}}<b> Montevideo</b>.</div>
                         <div class="cta-box__buttons">
                             <div class="button-wrapper">
                                 <button class="button button--riseup  js-button js-touchable qa-button">
-                                    <div class="button__content"><span class="button__text comforta" style="color:#fff">¡Sube!</span></div></button>
+                                    <div class="button__content"><span class="button__text comforta" style="color:#fff">{{alang[199].text}}</span></div></button>
                             </div>
                         </div>
                         <div class="cta-box__additional hidden"></div>

@@ -7,7 +7,7 @@
               
             </div>
         </div>
-        <div class="navigation-bar__title comforta" data-qa="navbar-title">Mensajes</div>
+        <div class="navigation-bar__title comforta" data-qa="navbar-title">{{alang[188].text}}</div>
         <div class="navigation-bar__secondary"></div>     
     </div>    
   </ion-nav-title>
@@ -15,25 +15,25 @@
 
 <div class="floating-action js-contact-list-actions-verified" style="display: none;">
     <div class="cta-box">
-        <div class="cta-box__content">¿Demasiados mensajes? Recibe únicamente mensajes de usuarios verificados.</div>
+        <div class="cta-box__content">{{alang[189].text}}.</div>
         <div class="cta-box__buttons">
             <div class="button-wrapper">
                 <button class="button button--primary   js-touchable qa-button">
-                    <div class="button__content"><span class="button__text">Activar</span></div><span class="button__loader"><i class="icon-svg icon-svg--stretch"><svg class="icon-svg_ icon-svg__inactive"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#loader"></use></svg></i></span></button>
-                <button class="inline-button inline-button--primary inline-button--sm"><span class="inline-button__text">No, gracias</span></button>
+                    <div class="button__content"><span class="button__text">{{alang[190].text}}</span></div><span class="button__loader"><i class="icon-svg icon-svg--stretch"><svg class="icon-svg_ icon-svg__inactive"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#loader"></use></svg></i></span></button>
+                <button class="inline-button inline-button--primary inline-button--sm"><span class="inline-button__text">{{alang[191].text}}</span></button>
             </div>
         </div>
     </div>
 </div>
 <div class="tabs tabs-top visible" style="background: #fff;border-color: #fff">
     <div class="tab js-contact-list-folders__item {{tab1}}" ng-model="tabALL" ng-click="onTabShow(1)" >
-        <div class="tab__label">TODOS</div>
+        <div class="tab__label">{{alang[192].text}}</div>
     </div>
     <div class="tab js-contact-list-folders__item {{tab2}}" ng-model="tabUNREAD" ng-click="onTabShow(2)">
-        <div class="tab__label">NO LEÍDOS</div>
+        <div class="tab__label">{{alang[193].text}}</div>
     </div>
     <div class="tab js-contact-list-folders__item {{tab3}}" ng-model="tabONLINE" ng-click="onTabShow(3)">
-        <div class="tab__label">EN LÍNEA</div>
+        <div class="tab__label">{{alang[194].text}}</div>
     </div>                         
 </div>
 <ion-content style="background:#fff" scroll="true" delegate-handle="userMessageScroll">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="feature-card__content">
-                                <div class="feature-card__title">Highlight in Montevideo</div>
+                                <div class="feature-card__title">{{alang[195].text}} Montevideo</div>
                             </div>
                         </div>
 
@@ -78,8 +78,8 @@
                                 </div>
                             </div>
                             <div class="feature-card__content">
-                                <div class="feature-card__title">Aumenta tus posibilidades</div>
-                                <div class="feature-card__text">¡Haz que las chicas te vean más en Encuentros!</div>
+                                <div class="feature-card__title">{{alang[196].text}}</div>
+                                <div class="feature-card__text">¡{{alang[197].text}}!</div>
                             </div>
                         </div>
                     </div>

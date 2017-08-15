@@ -9,7 +9,7 @@
     <link href="css/belloo.css" rel="stylesheet">
     <link href="css/ionic.app.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <script>
 	var site_url = "https://www.belloo.date/";
 	</script>
@@ -21,11 +21,14 @@
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 	<script src="lib/gsap/src/uncompressed/TweenMax.js"></script>
 	<script src="lib/ngFx/dist/ngFx.js"></script>
+    <script src="lib/angular-animate/angular-animate.js"/></script>
+    <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.min.js"></script>    
     <link rel="stylesheet" href="lib/awlert/dist/css/awlert.css">
     <script src="lib/awlert/dist/js/awlert.min.js"></script>
     <script src="cordova.js"></script>
 	<script src="lib/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
-    <script src="https://js.pusher.com/4.0/pusher.min.js"></script>    
+    <script src="https://js.pusher.com/4.0/pusher.min.js"></script>  
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.5.1/ng-flow-standalone.min.js"></script>
 	<script>
     var oneSignalID=20,notificationOpenedCallback=function(e){},reg=0,c_quantity=0,lid=43,loader=0,p_quantity=0,ticky=!1,app,interval,c_price,reg_photo="",p_price,url,mobile=!1,chatLimit=!1,config="",peer,in_videocall=!1,site_prices,account_basic,account_premium,lang,tlang,alang,online=[],unread=[],usPhotos="",cu,regName,localStream,tlang,current_user,user="",show_chat_premium=1,game_array,user_info,current_user_id=0,user_name,meet_limit=0,meet_pages=0,spotlight=[],da=site_url,chats=[],f=da,matche=[],visitors=[],mylikes=[],superlikes=[],myfans=[],cards=[],gresult=[],chatUser,s_age,bottom=!1,s_radius,s_gender,onlineMeet=0,chatInterval,y=f,user_country,u=y,a=u,user_city;
@@ -43,8 +46,6 @@
 
   </head>
   <body ng-app="starter" ng-controller="AppCtrl" style="background: #fff;">
-    <ion-pane ui-view="">
-
-    </ion-pane>
+    <div ui-view class="slide-top"></div>
   </body>
 </html>
