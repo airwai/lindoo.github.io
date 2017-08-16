@@ -107,11 +107,62 @@ angular.module('starter.controllers', [])
 	  }		
 	}
 
-    $ionicPlatform.ready(function() {
-        $cordovaNativeAudio.preloadSimple('call', 'audio/call.mp3');
-        $cordovaNativeAudio.preloadSimple('inchat', 'audio/inchat-sound.mp3');
-        $cordovaNativeAudio.preloadSimple('notification', 'audio/notification.wav');
-    });
+	$rootScope.load = function(){
+		 mobileUser = $localstorage.get('userHistory');
+		if(mobileUser == null){
+			oneSignalID = Math.floor((Math.random() * 93199999) + 1);
+			$localstorage.set('userHistory', oneSignalID);			
+		} else {
+			oneSignalID = mobileUser;
+		}		
+	  try {	
+		  $scope.ajaxRequest = A.Device.get({action: 'config', dID: oneSignalID});
+		  $scope.ajaxRequest.$promise.then(function(){											
+				$localstorage.setObject('config', $scope.ajaxRequest.config);
+				$localstorage.setObject('app', $scope.ajaxRequest.app);
+				app = $scope.ajaxRequest.app;
+				$localstorage.setObject('prices', $scope.ajaxRequest.prices);
+				max_ad = $scope.ajaxRequest.ad;
+				var isAndroid = ionic.Platform.isAndroid();
+				if(isAndroid){
+					adMobI = $scope.ajaxRequest.adMobA;
+				} else {
+					adMobI = $scope.ajaxRequest.adMobI;
+				}
+				$localstorage.setObject('lang', $scope.ajaxRequest.lang);
+				$localstorage.setObject('alang', $scope.ajaxRequest.alang);
+				$localstorage.setObject('user', $scope.ajaxRequest.user);
+				$localstorage.setObject('premium_package', $scope.ajaxRequest.premium_package);
+				$localstorage.setObject('credits_package', $scope.ajaxRequest.credits_package);					
+				$localstorage.setObject('account_basic', $scope.ajaxRequest.account_basic);
+				$localstorage.setObject('account_premium', $scope.ajaxRequest.account_premium);
+				$localstorage.setObject('gifts', $scope.ajaxRequest.gifts);
+				$rootScope.appGifts = $scope.ajaxRequest.gifts;
+				$localstorage.setObject('usPhotos', $scope.ajaxRequest.user.photos);	
+				if($scope.ajaxRequest.user != ''){
+					usPhotos = $scope.ajaxRequest.user.photos;
+					sape = $scope.ajaxRequest.user.slike;
+				} else {
+					$state.go('home.welcome');
+				}		
+		  },
+		  function(){}
+		  )		 
+	  }
+	  catch (err) {
+		console.log("Error " + err);
+	  }		
+	}	
+
+	$rootScope.load();
+
+	if(window.cordova){
+	    $ionicPlatform.ready(function() {
+	        $cordovaNativeAudio.preloadSimple('call', 'audio/call.mp3');
+	        $cordovaNativeAudio.preloadSimple('inchat', 'audio/inchat-sound.mp3');
+	        $cordovaNativeAudio.preloadSimple('notification', 'audio/notification.wav');
+	    });
+	}
 
     $rootScope.playSound = function(sound) {
         $cordovaNativeAudio.play(sound);
@@ -295,12 +346,7 @@ angular.module('starter.controllers', [])
       $scope.modalChatImage.hide();
     };	
 	 
-    $ionicModal.fromTemplateUrl('templates/modals/profile-photos.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
+
 
     $scope.openModal = function() {
       $ionicSlideBoxDelegate.slide(0);
@@ -360,12 +406,7 @@ angular.module('starter.controllers', [])
 	
 	$ionicPlatform.onHardwareBackButton(onHardwareBackButton);
 	
-    $ionicModal.fromTemplateUrl('templates/modals/profile.html', {
-      scope: $scope,
-      animation: 'animated fadeIn'
-    }).then(function(modal) {
-      $scope.profileModal = modal;
-    });
+
 	
 	
     $ionicModal.fromTemplateUrl('templates/modals/premium.html', {
@@ -893,7 +934,8 @@ angular.module('starter.controllers', [])
 	} else {
 		$ionicViewSwitcher.nextDirection("back");
 	}
-
+	 var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
+	 
 	alang.forEach(function(entry) {					  
 	  $scope.alang.push({
 		id: entry,
@@ -992,7 +1034,8 @@ angular.module('starter.controllers', [])
 
 		  },
 		  function(){}
-		  )		 
+		  )	
+		  meetHistory = $scope.meet;	 
 		}
 		catch (err) {
 			console.log("Error " + err);
@@ -1031,14 +1074,28 @@ angular.module('starter.controllers', [])
 				});				
 		  },
 		  function(){}
-		  )		 
+		  )	
+		  meetHistory = $scope.meet;
 		}
 		catch (err) {
 			console.log("Error " + err);
 		}	
 	}
 
-	meet();	
+	console.log(meetHistory.length);
+	if(meetHistory.length < 1){
+		$scope.loading = true;
+		meet();
+	} else {
+		$scope.loading = false;	
+		$scope.meet = meetHistory;
+		setTimeout(function(){
+			var total = meetHistory.length / 9;
+			var index = total*400;
+	  		viewScroll.scrollTo(0, index, false);			
+		},500)	
+	}
+		
 	
 	$scope.spot_price = prices.spotlight;
 	$scope.openSpot = function(){
@@ -1427,6 +1484,11 @@ angular.module('starter.controllers', [])
   })
   
   .controller('ExploreCtrl', function($scope,$rootScope,$ionicViewSwitcher,$state,$sce,$ionicPlatform,preloader,$timeout, $ionicModal,A,$localstorage,Navigation,awlert,$ionicViewSwitcher,currentUser) {
+	if(url == 'meet'){
+		$scope.fromMeet = true;
+	} else {
+		$scope.fromMeet = false;
+	}
 	url = 'explore';
 	user = $localstorage.getObject('user');
 	config = $localstorage.getObject('config');	 
@@ -2266,7 +2328,7 @@ angular.module('starter.controllers', [])
 	$rootScope.logged = true;
 	$rootScope.me = user;
 	$scope.newChat = false;
-
+	meetHistory = [];
 	if(window.cordova){
 		$ionicViewSwitcher.nextDirection("forward");
 	} else {
@@ -3132,7 +3194,6 @@ angular.module('starter.controllers', [])
 
 	var textarea = $('#chat-input-textarea');
 	var typingDelayMillis = 800; // how long user can "think about his spelling" before we show "No one is typing -blank space." message
-	updateLastTypedTime();
 	function refreshTypingStatus() {
 	    if (textarea.val() == '') {
 			var message = user.id+','+currentUser.selectedUser.id+','+0;
@@ -3144,8 +3205,8 @@ angular.module('starter.controllers', [])
 	    	if( t > typingDelayMillis){
 		    	updateLastTypedTime();
 		    	console.log('typing more');
-		    	var message = user_info.id+','+user+','+1;
-				$.get( gUrl, { action: 'typing', query: message } );
+		    	var message = user.id+','+currentUser.selectedUser.id+','+1;
+				A.RT.get({action: 'typing', query: message});
 			}	    	
 	    	console.log('waiting');
 	    }

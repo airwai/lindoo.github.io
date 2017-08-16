@@ -47,5 +47,39 @@
   </head>
   <body ng-app="starter" ng-controller="AppCtrl" style="background: #fff;">
     <div ui-view class="slide-top"></div>
+    <aside class="ovl js-ovl-close js-core-events-container" id="rise-up"  >
+    <section class="ovl-frame js-ovl-wrap animated fadeIn" style="top: 50%;">
+        <div class="js-ovl-content">
+            <div class="ovl-body">
+                <div class="ovl__header ovl__header--green">
+                    <div class="ovl__header-content">
+                        <div class="bricks-line bricks-line--lg">
+                            <div class="brick brick--xxlg brick--stroke">
+                                <div class="brick-img"><img src="<?= randomPhotoUser($sm['user']['s_gender']); ?>" width="120" height="120" alt=""></div>
+                            </div>
+                            <div class="brick brick--xxlg brick--stroke">
+                                <div class="brick-img"><img src="<?= $sm['user']['profile_photo']; ?>" width="120" height="120" alt=""></div>
+                            </div>
+                            <div class="brick brick--xxlg brick--stroke">
+                                <div class="brick-img"><img src="<?= randomPhotoUser($sm['user']['s_gender']); ?>" width="120" height="120" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ovl-content"><center>
+                    <h5><?= $sm['lang'][414]['text']; ?></h5>
+                    <p class="x-large"><?= $sm['lang'][415]['text']; ?></p>
+                </div>
+                <div class="ovl__actions">
+                    <div class="btn btn--riseup" onclick="riseUp()"> <span class="btn-txt"><?= $sm['lang'][416]['text']; ?></span></div>
+                    <br>
+                    <p style="color:#555;font-size: 12px;"><?= $sm['lang'][335]['text']; ?>: <?= $sm['price']['first']; ?> <?= $sm['lang'][73]['text']; ?>
+                </div>
+                <div class="ovl-close"><i class="icon icon--white ion-close-round" style="color: #fff;font-size: 24px;"></i></div>
+            </div></center>
+        </div>
+    </section>
+    <div class="ovl-align"></div>
+</aside>
   </body>
 </html>

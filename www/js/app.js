@@ -8,6 +8,7 @@ var rt = new Pusher('b0b15fcac140c816ccbe', {
   cluster: "us2"
 });
 var lag = [];
+var meetHistory = [];
 var channel = rt.subscribe('pds');
 var lastTypedTime = new Date(0);
 angular.module('starter', [

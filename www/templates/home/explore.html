@@ -6,13 +6,17 @@
               <i class="icon-svg ion-navicon-round" ></i>
               <span class="navigation-bar__menu-notification" ng-if="notificationMenu"></span>
             </div>
-        </div>
+        </div>       
         <div class="navigation-bar__title">
-            <div class="navigation-bar__logo" style="z-index: 999;">
+            <div class="navigation-bar__logo" style="z-index: 999;margin-left: 60px;">
               <img src="{{logo}}" />
             </div>
         </div>
-        <div class="navigation-bar__secondary"></div>
+        <div class="navigation-bar__secondary" ng-if="fromMeet" ng-click="goBack()" style="margin-right: 15px;">
+            <div class="navigation-bar__icon js-navigation">
+                <i class="icon-svg ion-arrow-right-c"></i>
+            </div>            
+        </div>
     </div>
   </ion-nav-title>
 
