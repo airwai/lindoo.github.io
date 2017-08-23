@@ -1,4 +1,4 @@
-<ion-view title="Tinder">
+<ion-view title="{{alang[36].text}}">
   <ion-nav-title>
     <button class="button button-clear m-t-xs" ng-click="openEditProfileModal()">
 	  <div class="text-center mi-pollita">{{alang[36].text}}</div>
@@ -7,15 +7,14 @@
 
   <ion-nav-buttons side="right">
     <button class="button button-clear" ng-click="goToExplore()">
-      <i class="icon ion-fireball" style="color:#ccc"></i>
+      <img src="img/heart.svg" width="30px" />
     </button>
   </ion-nav-buttons>
   
   <ion-nav-buttons side="left">
     <button class="button button-clear" ng-click="openCreditsModal('{{photo}}')">
-      <i class="icon ion-ios-circle-filled" style="color:#FEC309"></i>
-	  <span class="header-credits-span">C</span>
-	  <span class="header-credits bg-tinder">{{credits}}</span>
+      <i class="icon"><img src="img/credit-card.svg" width="30px" /></i>
+	  <span class="header-credits" style="margin-left:-5px">{{credits}}</span>
     </button>
   </ion-nav-buttons>  
 
@@ -24,7 +23,8 @@
     <div class="wrapper text-center">
       <div class="pos-rlt">
         <div class="thumb-xxl rounded profilePhoto border-profile" data-src="{{photo}}" ng-click="openProfileModal({{id}},'{{name}}','{{photo}}',{{age}},'{{city}}')"></div>
-        <i class="icon ion-edit button-edit bg-tinder light text-lg b b-3x b-light b-2x rounded" ng-click="openEditProfileModal()"></i>
+        <!--<i class="icon ion-edit button-edit bg-tinder light text-lg b b-3x b-light b-2x rounded" style="border:4px #FFFFFF solid" ng-click="openEditProfileModal()"></i>-->
+        <img class="icon ion-edit button-edit bg-tinder light text-lg b b-3x b-light b-2x rounded" src="img/profilconfig.svg" width="50px" style="border:4px #FFFFFF solid" ng-click="openEditProfileModal()" />
       </div>
     </div>
 	<h2 class="mi-pollita text-center" style="padding:0;margin:0">{{name}}</h2>
@@ -39,39 +39,39 @@
       </div>
       <div class="item item-icon-left" nav-direction="foward"  ui-sref="home.meet" style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
         <div style="color:#a3a3a3">
-      <i class="icon ion-ios-location-outline"></i>
+      <i class="icon"><img src="img/placeholder.svg" width="35px" /></i>
        {{lang[49].text}}
         </div>    
       </div>       
       <div class="item item-icon-left" ng-click="goToMatches()"  style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
         <div style="color:#a3a3a3">
-			<i class="icon ion-ios-heart-outline"></i>
+			<i class="icon"><img src="img/heart.svg" width="35px" /></i>
 			{{alang[39].text}}
 			<span class="badge badge-assertive">{{newFans}}</span>
         </div>		
       </div> 
       <div class="item item-icon-left" ng-click="goToVisitors()"  style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
         <div style="color:#a3a3a3">
-			<i class="icon ion-ios-eye-outline"></i>
+			<i class="icon"><img src="img/eye.svg" width="35px" /></i>
 			{{alang[10].text}}
 			<span class="badge badge-assertive">{{newVisitors}}</span>
         </div>		
       </div> 
       <div class="item item-icon-left" ng-click="openSettingsModal()"  style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
         <div style="color:#a3a3a3">
-			<i class="icon ion-ios-gear-outline"></i>
+			<i class="icon"><img src="img/profile.svg" width="35px" /></i>
 			{{alang[40].text}}
         </div>		
       </div> 
-      <div ng-if="notPremium" class="item item-icon-left mi-violetita" ng-click="openPremiumModal()" style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:5px;">
+      <div ng-if="notPremium" class="item item-icon-left mi-violetita" ng-click="openPremiumModal()" style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;border-top:1px solid #dedede;margin-bottom:0px;">
         <div style="color:#fff">
-			<i class="icon ion-android-star-outline"></i>
+			<i class="icon"><img src="img/padlock.svg" width="35px" /></i>
 			{{alang[41].text}}
         </div>		
       </div>  	  
-      <div class="item item-icon-left" ng-click="logout()"  style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;margin-bottom:5px;">
+      <div class="item item-icon-left" ng-click="logout()"  style="width:100%;margin-left:0;padding-left:20%;margin-bottom:10px;border:none;margin-bottom:5px;border-bottom:1px solid #dedede;border-top:1px solid #dedede;">
         <div style="color:#a3a3a3">
-			<i class="icon ion-ios-arrow-thin-left"></i>
+			<i class="icon"><img src="img/plug.svg" width="35px" /></i>
 			{{alang[42].text}}
         </div>		
       </div> 	

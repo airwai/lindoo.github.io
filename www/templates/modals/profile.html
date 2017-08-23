@@ -74,18 +74,18 @@
 
   <div class="card-actions padder-v on-profile bg-gd" ng-if="!myProfile" ng-show="!wtf" horizontal layout around-justified center >
     <div class="card-action no-padder">
-      <button class="button button-assertive rounded bg-nolike-btn" ng-class="{zoom: isMoveLeft}" ng-click="closeProfileModal();cardDestroyed(0,id);">
-        <i class="icon ion-close-round text-2x rounded"></i>
+      <button class="button button-assertive bg-nolike-btn" ng-class="{zoom: isMoveLeft}" ng-click="closeProfileModal();cardDestroyed(0,id);">
+        <img src="img/no.png" style="margin-top: 0px;" width="50px"></img>
       </button>
     </div>
     <div class="card-action no-padder"  ng-click="closeProfileModal();goToChatGlobal('home.messaging','right',cu)">
-      <button class="button button-calm rounded bg-chat-btn">
-        <i class="icon ion-chatbubble-working text-2x rounded"></i>
+      <button class="button button-calm bg-chat-btn">
+        <img src="img/gchat.png" style="margin-top: 0px;" width="50px"></img>
       </button>
     </div>
     <div class="card-action no-padder">
-      <button class="button button-balanced bg-like-btn rounded" ng-class="{zoom: isMoveRight}" ng-click="closeProfileModal();cardDestroyed(1,id);">
-        <i class="icon ion-heart text-2x rounded"></i>
+      <button class="button button-balanced bg-like-btn" ng-class="{zoom: isMoveRight}" ng-click="closeProfileModal();cardDestroyed(1,id);">
+        <img src="img/yes.png" style="margin-top: 0px;" width="50px"></img>
       </button>
     </div>
     

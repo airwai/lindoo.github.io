@@ -97,7 +97,7 @@
 		</div>
 		<div class="footer-btn-wrap" ng-show="actions" ng-if="!isGifShown" ng-hide='isGiftShown'>
 		  <button type="button" class="button button-clear footer-btn" ng-click="visible(1)">
-			<img src="img/chat-more.png" style="margin-top:8px;margin-right:10px;width:35px;height:30px" />
+			<img src="img/chat-more.png" style="margin-top:7px;margin-right:10px;width:35px;height:30px" />
 		  </button>  
 		</div>				
 		<label class="item-input-wrapper no-bg" ng-show="actions">
@@ -105,9 +105,9 @@
 		  </textarea>
 		  <input type="search" placeholder="{{alang[111].text}}" id="type-area2" ng-model="gifQuery" ng-change="newGif(gifQuery)" ng-model-options="{ debounce: 500 }" ng-show="isGifShown">
 		</label>
-		<div class="footer-btn-wrap" ng-show="actions">
+		<div class="footer-btn-wrap" ng-show="actions" style="right:8px">
 		  <button type=submit class="button button-clear footer-btn" ng-click="sendText(message);message = '';" ng-disabled="message.length == 0" ng-show="isGifShown === false || isGiftShown === false">
-			<i class="icon ion-ios-paperplane-outline"></i>
+			<img src="img/sender.svg" width="30px" style="padding-top:7px;margin-left:20px"/>
 		  </button>
 		</div>
 		
