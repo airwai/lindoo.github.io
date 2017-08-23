@@ -4012,7 +4012,7 @@ a.subdued {
     left: 0;
     z-index: 0;
     overflow: hidden;
-    margin: 0 0px;
+    margin: 0 10px;
     min-width: 30px;
     height: 43px;
     text-align: center;
@@ -5227,7 +5227,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   overflow: hidden;
   min-height: 100%;
   max-height: 100%;
-  width: 305px;
+  width: 275px;
   background-color: #fff; }
   .menu .scroll-content {
     z-index: 10; }
@@ -5285,8 +5285,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   left: 0;
   z-index: 10;
   width: 100%;
-  height: 100%;
-  background: transparent !important; }
+  height: 100%; }
 
 .modal-backdrop-bg {
   pointer-events: none; }
@@ -9625,15 +9624,15 @@ a.button {
 
 [nav-view-transition="ios"] [nav-view="entering"],
 [nav-view-transition="ios"] [nav-view="leaving"] {
-  -webkit-transition-duration: 400ms;
-  transition-duration: 400ms;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
   -webkit-transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
   transition-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1);
-  -webkit-transition-property: opacity, box-shadow;
-  transition-property: opacity, box-shadow; }
+  -webkit-transition-property: opacity, -webkit-transform, box-shadow;
+  transition-property: opacity, transform, box-shadow; }
 
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
-  background-color: #fff; }
+  background-color: #000; }
 
 [nav-view-transition="ios"] [nav-view="active"],
 [nav-view-transition="ios"][nav-view-direction="forward"] [nav-view="entering"],
@@ -10753,9 +10752,9 @@ html [segment], html segment {
 
 .giphy-container {
   width: 100%;
-  height: 180px;
+  height: 112px;
   position: absolute;
-  bottom: 25px;
+  bottom: 44px;
   border-top: 1px solid #ddd;
   background-color: white; }
   .giphy-container .scroll-horizontal {
@@ -10935,8 +10934,8 @@ td-card {
     width: 96px;
     height: 96px;
     border-radius: 100px;
-    background-color: #fdc4c2;
-    border: 2px solid #ff8289; }
+    background-color: #aaa;
+    border: 2px solid #fff; }
   .load:after {
     z-index: -100;
     -webkit-animation: outer-ripple 2s linear infinite;
@@ -11216,6 +11215,3 @@ td-card {
 /* MATCH */
 
 /* end of MATCH */
-
-
-

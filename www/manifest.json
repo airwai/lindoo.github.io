@@ -1,6 +1,6 @@
 {
-  "name": "Belloo by Premium Dating Script",
-  "short_name": "Belloo",
+  "name": "PDS",
+  "short_name": "PDS app",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

@@ -1,63 +1,19 @@
-<ion-view title="" hide-nav-bar="true">
-  <ion-nav-title>
-    <div class="navigation-bar"   >
-        <div class="navigation-bar__primary">
-        </div>
-        <div class="navigation-bar__title">
-            <div class="navigation-bar__logo" style="z-index: 999;">
-              <img src="{{logo}}" />
-            </div>
-        </div>
-        <div class="navigation-bar__secondary"></div>
-    </div>
-  </ion-nav-title>
-<ion-content ng-style="{height: iframeHeight + 'px'}" scroll="true">
+<ion-view>
+  <div class="wrapper" fit vertical layout justified>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" active-slide="activeIndex" ng-init="activeIndex = 0" class="m-t">
+      <ion-slide class="text-center flex-vertical-center" ng-repeat="i in [1,2,3]">
+		<div class="text-center text-muted text-intro">
+			<span ng-show="i == 1">{{lang19}}</span>
+			<span ng-show="i == 2">{{lang20}}</span>
+			<span ng-show="i == 3">{{lang21}}</span>			
+		</div>	  
+        <img class="w-full" ng-src="{{site_url}}app/img/intro_{{i}}.jpg" alt="">
+      </ion-slide>
+    </ion-slide-box>  
 
-<div class="page landing visible"  style="z-index: 600;">
-    <div class="flexible-page">
-        <div class="page-content">
-            <div class="landing-decorations landing-decorations--badoo"></div>
-            <div class="landing-wrapper">
-                <div class="landing-logo">
-                    <img src="{{logo}}"></img>
-                </div>
-                <div class="landing-actions">
-                    <div class="cta-box">
-                        <div class="cta-box__header" data-alid="147"></div>
-                        <div class="cta-box__content" data-alid="148"></div>
-                        <div class="cta-box__buttons">
-                        <ul class="list-view ">
-                          <li class="list-item-form">
-                            <label for="signin-name" data-alid="149"></label>
-                            <input ng-model="user.login_email" name="name" type="email" placeholder="Correo o telf. móvil" autocapitalize="off">
-                          </li>
-                          <li class="list-item-form" ng-show="!forgetBtn">
-                            <label for="signin-password" data-alid="150"></label>
-                            <input id="pass" ng-keyup="keyup(user.login_pass.length)" ng-model="user.login_pass" name="password" type="password" placeholder="Requerida">
-                          </li>
-                               
-                        </ul>
-                        <div class="button-wrapper" style="margin-top: 25px">
-                            <div class="login-loader" style="margin-bottom: 40px;" ng-if="loginBtn && !forgetBtn">
-                              <center><div class="loader02"></div></center>
-                            </div>                        
-                            <button class="button button--primary" ng-if="!loginBtn" ng-class="{disabled: isActive}" ng-click="send(user)">
-                            <div class="button__content"><span class="button__text">{{alang[151].text}}</span></div></button>
-                            <button class="button button--primary" ng-if="forgetBtn" ng-click="forget(user)">
-                            <div class="button__content"><span class="button__text" data-alid="152"></span></div></button>                            
-                            <button ng-click="goTo('home.register','left','')" class="inline-button inline-button--primary"><span class="inline-button__text" data-alid="153"></span></button>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="landing-footer">
-                  <span ng-click="recoverPass()" ng-if="!loginBtn">{{alang[154].text}}</span>
-                  <span ng-click="backLogin()" ng-if="loginBtn">{{alang[155].text}}</span>
-                  <a ng-click="changePage('privacy','right','')">{{alang[156].text}}</a>
-                  <a ng-click="changePage('privacy','right','')">{{alang[157].text}}</a>
-                </div>
-            </div>
-        </div>
+    <div class="text-center text-muted">
+		<span data-alid="22"></span>
+		<button class="button button-block button-tinder bg-tinder" ng-click="changePage('home.login','right','')" data-alid="23"></button>
     </div>
-</div>
-</ion-content>
+  </div>
 </ion-view>	
