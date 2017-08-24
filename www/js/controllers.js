@@ -1495,7 +1495,7 @@ angular.module('starter.controllers', [])
     };
   })
   
-	.controller('LoaderCtrl',function($scope,$rootScope, $state, $cordovaDevice,A,$localstorage,$ionicLoading) {
+	.controller('LoaderCtrl',function($scope,$rootScope,$ionicViewSwitcher, $state, $cordovaDevice,A,$localstorage,$ionicLoading) {
 		 mobileUser = $localstorage.get('userHistory');
 		 $ionicViewSwitcher.nextDirection("exit");
 		if(mobileUser == null){

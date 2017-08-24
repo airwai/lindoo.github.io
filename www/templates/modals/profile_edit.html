@@ -271,7 +271,11 @@
         <textarea id="userBio" style="width:100%;font-size:16px;">{{bio}}</textarea>
       </div>
     </div>
-
+  <div flow-init
+       flow-name="uploader.flow"
+       flow-files-added="processUserFiles($files)">
+    <button flow-btn type="file" id="uploadUserPhoto" style="display: none;">Upload Images</button>
+   </div> 
  <div class="item item-divider b-none" style="background:#fff"></div>
   </ion-content>
 </ion-modal-view>
