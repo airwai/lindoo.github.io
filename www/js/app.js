@@ -52,12 +52,20 @@ angular.module('starter', [
 
 
 
+
+
 .config(function($ionicConfigProvider) {
   $ionicConfigProvider.views.transition('platform');				 
   $ionicConfigProvider.navBar.alignTitle('center');
   $ionicConfigProvider.views.swipeBackEnabled(false);
   $ionicConfigProvider.views.maxCache(0);  
   $ionicConfigProvider.tabs.position('bottom');
+})
+
+.config(function($sceDelegateProvider){
+
+  $sceDelegateProvider.resourceUrlWhitelist(['self','https://*.**','http://*.**']);
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

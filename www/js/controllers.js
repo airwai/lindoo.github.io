@@ -32,23 +32,37 @@ angular.module('starter.controllers', [])
 				} else {
 					adMobI = $scope.ajaxRequest.adMobI;
 				}
-				$localstorage.setObject('lang', $scope.ajaxRequest.lang);
-				$localstorage.setObject('alang', $scope.ajaxRequest.alang);
+				var l1 = $scope.ajaxRequest.lang;
+				var l2 = $scope.ajaxRequest.alang;
+				var l3 = $scope.ajaxRequest.tlang;
+				l1.forEach(function(entry) {					  
+					l1[entry.id].text = entry.text.replace("&#039;", "'");	
+				});	
+				l2.forEach(function(entry) {					  
+				  l2[entry.id].text = entry.text.replace("&#039;", "'");		
+				});	
+				l3.forEach(function(entry) {					  
+				  l3[entry.id].text = entry.text.replace("&#039;", "'");		
+				});														
+				$localstorage.setObject('lang', l1);
+				$localstorage.setObject('alang', l2);
+				$localstorage.setObject('tlang', l3);
+
 				$localstorage.setObject('user', $scope.ajaxRequest.user);
 				$localstorage.setObject('premium_package', $scope.ajaxRequest.premium_package);
 				$localstorage.setObject('credits_package', $scope.ajaxRequest.credits_package);					
 				$localstorage.setObject('account_basic', $scope.ajaxRequest.account_basic);
 				$localstorage.setObject('account_premium', $scope.ajaxRequest.account_premium);
 				$localstorage.setObject('gifts', $scope.ajaxRequest.gifts);
-				$rootScope.appGifts = $scope.ajaxRequest.gifts;
-				$localstorage.setObject('usPhotos', $scope.ajaxRequest.user.photos);	
+				$rootScope.appGifts = $scope.ajaxRequest.gifts;	
 				if($scope.ajaxRequest.user != ''){
 					$state.go('home.explore');
 					usPhotos = $scope.ajaxRequest.user.photos;
+					$localstorage.setObject('usPhotos', $scope.ajaxRequest.user.photos);
 					sape = $scope.ajaxRequest.user.slike;
 				} else {
 					$state.go('welcome');
-				}
+				}			
 				var style = document.createElement('style');
 				style.type = 'text/css';
 				style.innerHTML = '.bg-tinder {background:'+app.first_color+'; background: -moz-linear-gradient(left,  '+app.first_color+' 0%, '+app.second_color+' 100%);background: -webkit-linear-gradient(left,  '+app.first_color+' 0%,'+app.second_color+' 100%); background: linear-gradient(to right,  '+app.first_color+' 0%,'+app.second_color+' 100%); color:#fff }';
@@ -84,8 +98,21 @@ angular.module('starter.controllers', [])
 				} else {
 					adMobI = $scope.ajaxRequest.adMobI;
 				}
-				$localstorage.setObject('lang', $scope.ajaxRequest.lang);
-				$localstorage.setObject('alang', $scope.ajaxRequest.alang);
+				var l1 = $scope.ajaxRequest.lang;
+				var l2 = $scope.ajaxRequest.alang;
+				var l3 = $scope.ajaxRequest.tlang;
+				l1.forEach(function(entry) {					  
+					l1[entry.id].text = entry.text.replace("&#039;", "'");	
+				});	
+				l2.forEach(function(entry) {					  
+				  l2[entry.id].text = entry.text.replace("&#039;", "'");		
+				});	
+				l3.forEach(function(entry) {					  
+				  l3[entry.id].text = entry.text.replace("&#039;", "'");		
+				});														
+				$localstorage.setObject('lang', l1);
+				$localstorage.setObject('alang', l2);
+				$localstorage.setObject('tlang', l3);			
 				$localstorage.setObject('user', $scope.ajaxRequest.user);
 				$localstorage.setObject('premium_package', $scope.ajaxRequest.premium_package);
 				$localstorage.setObject('credits_package', $scope.ajaxRequest.credits_package);					
@@ -93,10 +120,11 @@ angular.module('starter.controllers', [])
 				$localstorage.setObject('account_premium', $scope.ajaxRequest.account_premium);
 				$localstorage.setObject('gifts', $scope.ajaxRequest.gifts);
 				$rootScope.appGifts = $scope.ajaxRequest.gifts;
-				$localstorage.setObject('usPhotos', $scope.ajaxRequest.user.photos);	
+					
 				if($scope.ajaxRequest.user != ''){
 					usPhotos = $scope.ajaxRequest.user.photos;
 					sape = $scope.ajaxRequest.user.slike;
+					$localstorage.setObject('usPhotos', $scope.ajaxRequest.user.photos);
 				} else {
 					$state.go('welcome');
 				}
@@ -1510,7 +1538,7 @@ angular.module('starter.controllers', [])
 	})
   
 
-  .controller('WelcomeCtrl', function($scope, $state, $ionicLoading, $timeout,$localstorage,Navigation) {
+  .controller('WelcomeCtrl', function($scope, $state,$sce, $ionicLoading, $timeout,$localstorage,Navigation) {
 	config = $localstorage.getObject('config');									  
 	lang = $localstorage.getObject('lang');
 	alang = $localstorage.getObject('alang');
@@ -1518,6 +1546,7 @@ angular.module('starter.controllers', [])
 	url = 'welcome';
 	$('[data-alid]').each(function(){
 	  var id = $(this).attr('data-alid');
+
 	  $(this).text(alang[id].text);
 	});
 	$scope.site_url = site_url;
